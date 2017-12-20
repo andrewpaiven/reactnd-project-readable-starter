@@ -1,28 +1,88 @@
-.App {
+/* Container */
+
+.container {
+  width:100%;
+  height:100%;
+  font-family: 'Raleway';
+  position: absolute;
+}
+
+/* Post Style */
+
+.postDiv {
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  -webkit-box-shadow: 10px 10px 101px -61px rgba(0,0,0,0.69);
+  -moz-box-shadow: 10px 10px 101px -61px rgba(0,0,0,0.69);
+  box-shadow: 10px 10px 101px -61px rgba(0,0,0,0.69);
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&1+0,0+100;White+to+Transparent */
+  background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+  border: 1px solid grey;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.postTitle {
+  font-size: 20px;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.postAuthor {
+  font-size: 15px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+.postTimeStampAndCategory {
+  text-align: center;
+  font-size: 10px;
+}
+
+.postContent {
+}
+
+.postList {
+  margin-left: 210px;
+}
+
+/* Menu */
+
+.menuContainer {
+  height: 100%;
+  background-color: black;
+  display: inline;
+  position: fixed;
+}
+
+.menu {
+  display: inline;
+  width: 200px;
+  height: 100%;
+  float: left;
+  text-decoration: none;
+  padding-left: 10px;
+  margin-top: 0px;
+  padding-left:0px;
+}
+
+.menuItem {
+  list-style-type: none;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 50px;
+  padding-left: 15px;
+  background-color: black;
   color: white;
 }
 
-.App-title {
-  font-size: 1.5em;
+.menuItem:hover {
+  background-color: ghostwhite;
+  color: black;
 }
 
-.App-intro {
-  font-size: large;
-}
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
