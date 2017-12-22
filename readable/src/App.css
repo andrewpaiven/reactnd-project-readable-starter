@@ -5,6 +5,7 @@
   height:100%;
   font-family: 'Raleway';
   position: absolute;
+  display: flow-root;
 }
 
 /* Post Style */
@@ -34,8 +35,28 @@
   padding-left: 30px;
   margin-top: 30px;
   margin-left: 200px;
-  display: block;
+  display: inline-block;
   font-size: 60px;
+
+
+}
+
+.newPost{
+  display: inline-block;
+  background-color: darkgreen;
+  color: white;
+  font-size: 12px;
+  border: 1px solid #c5c5c5;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100px;
+  height: 20px;
+  position: absolute;
+  margin-top: 65px;
+  margin-left: 20px;
 
 }
 
@@ -64,7 +85,6 @@
 .postList {
   margin-left: 200px;
   background-color: white;
-  position:absolute;
 }
 
 .postDelete {

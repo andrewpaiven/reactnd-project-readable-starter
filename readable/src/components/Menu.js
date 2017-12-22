@@ -11,7 +11,7 @@ class Menu extends Component {
             <ul className="menu">
                 <li className="menuItem" style={{'font-family': 'Pacifico', 'font-size':'40px'}}>Readable</li>
                 {this.props.menuItems.map((menuItem)=>(
-                    <li className="menuItem">{menuItem}</li>
+                    <li className="menuItem">{menuItem.name}</li>
                 ))}
             </ul>
         </div>

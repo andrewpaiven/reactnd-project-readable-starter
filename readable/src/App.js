@@ -1,41 +1,55 @@
 import React, { Component } from 'react';
 import './App.css';
 import Menu from "./components/Menu.js"
-import PostList from "./components/PostList.js"
+import PostList from "./components/PostList"
+import * as CategoriesApi from "./api/categoriesAPI"
+import { connect } from 'react-redux'
+import { fetchPosts } from './actions/PostsActions'
 
 class App extends Component {
 
-    menuItems = ['Fun Things','Literature','Health','Sports']
+    state = {
+        categories: [],
+    }
 
-    postList  = [
-        {
-            title: "The best guapa in the world",
-            author: "Andre Rocha",
-            body: "The best guapa in the world is Paz Arroyo. Valencian by nature and dragon by right. She likes eating, fiesta, and gets angry when she cooks. If you keep away from her when she cooks you'll have a lovely time. She's just adorable",
-            category: "fiesta",
-            timestamp: "12/03/2018",
-            voteScore: 1,
-        },
-        {
-            title: "The best guapa in the world",
-            author: "Andre Rocha",
-            body: "The best guapa in the world is Paz Arroyo. Valencian by nature and dragon by right. She likes eating, fiesta, and gets angry when she cooks. If you keep away from her when she cooks you'll have a lovely time. She's just adorable",
-            category: "fiesta",
-            timestamp: "12/03/2018",
-            voteScore: 1,
-        }
-    ]
+    componentDidMount() {
+        this.loadCategories()
+        this.props.fetchPosts()
+    }
+
+    loadCategories = () => {
+        CategoriesApi.getAll().then((categories)=>{
+            this.setState({
+                categories: categories
+            })
+
+        })
+    }
+
+
 
     render() {
         return (
             <div className="container">
-                <Menu menuItems={this.menuItems}/>
+                <Menu menuItems={this.state.categories}/>
                 <span className="headerPostList">Fun Things</span>
-                <PostList postList={this.postList}/>
+                <button className="newPost">New Post</button>
+                <PostList postList={this.props.postList}/>
             </div>
         )
 
     }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+    categories: state.categories,
+    postList: state.postList
+})
+
+function mapDispatchToProps(dispatch) {
+    return({
+        fetchPosts: () => dispatch(fetchPosts())
+    })
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);

@@ -6,6 +6,12 @@ import Voter from './Voter.js'
 
 class Post extends Component {
 
+    processTime = (unixTime) => {
+        let timeStamp = new Date(unixTime);
+        let timeStampString = `${timeStamp.getDate()}\\${timeStamp.getMonth()}\\${timeStamp.getYear()} @ ${timeStamp.toISOString().slice(-13, -5)}`
+        return timeStampString
+    }
+
     render() {
         return(
             <div className="postDiv">
@@ -13,7 +19,7 @@ class Post extends Component {
                 <h2 className="postAuthor">{`by ${this.props.author}`}</h2>
                 <Voter voteScore={this.props.voteScore}/>
                 <p className="postContent">{`${this.props.body}`}</p>
-                <span className="postTimeStampAndCategory">{`Posted in ${this.props.category} on ${this.props.timestamp}`}</span>
+                <span className="postTimeStampAndCategory">{`Posted in ${this.props.category} on ${this.processTime(this.props.timestamp)}`}</span>
                 <button className="postEdit">Edit Post</button>
                 <button className="postDelete">Delete Post</button>
             </div>
