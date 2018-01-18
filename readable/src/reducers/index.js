@@ -1,36 +1,36 @@
 /**
  * Created by apaivaer on 20/12/2017.
  */
-import { VOTE_UP, VOTE_DOWN } from "../actions/VoteAction"
-import { RECEIVE_ALL_POSTS,receiveAllPosts } from "../actions/PostsActions"
-
+import { RECEIVE_ALL_POSTS, VOTE_POST_UP } from "../actions/PostsActions"
+import { RECEIVE_ALL_CATEGORIES } from "../actions/CategoriesActions"
 const initialState = {
     postList: [],
     categories: []
-
 }
 
-
 function reducer(state = initialState,action) {
-
-    let newState = {
-
-    }
-
-    console.log('Calling reducer with action ' + action.posts)
 
     switch(action.type) {
 
         case RECEIVE_ALL_POSTS:
-            Object.assign(newState,state,{
+            return {
+                ...state,
                 postList: action.posts
+        }
+
+        case RECEIVE_ALL_CATEGORIES:
+            return {
+                ...state,
+                categories: action.categories
+            }
+
+        case VOTE_POST_UP:
+            Object.assign({},state, {
+                ...state,
             })
-            return newState
-            break
-        default:
-
             return state
-
+        default:
+            return state
 
         //Return new state
         return state

@@ -2,37 +2,26 @@ import React, { Component } from 'react';
 import './App.css';
 import Menu from "./components/Menu.js"
 import PostList from "./components/PostList"
-import * as CategoriesApi from "./api/categoriesAPI"
 import { connect } from 'react-redux'
 import { fetchPosts } from './actions/PostsActions'
+import { fetchCategories} from './actions/CategoriesActions'
 
 class App extends Component {
 
     state = {
-        categories: [],
+        currentTab: "All posts",
     }
 
     componentDidMount() {
-        this.loadCategories()
+        this.props.fetchCategories()
         this.props.fetchPosts()
     }
-
-    loadCategories = () => {
-        CategoriesApi.getAll().then((categories)=>{
-            this.setState({
-                categories: categories
-            })
-
-        })
-    }
-
-
 
     render() {
         return (
             <div className="container">
-                <Menu menuItems={this.state.categories}/>
-                <span className="headerPostList">Fun Things</span>
+                <Menu menuItems={this.props.categories}/>
+                <span className="headerPostList">{this.state.currentTab}</span>
                 <button className="newPost">New Post</button>
                 <PostList postList={this.props.postList}/>
             </div>
@@ -43,12 +32,14 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
     categories: state.categories,
-    postList: state.postList
+    postList: state.postList,
+    currentTab: state.currentTab,
 })
 
 function mapDispatchToProps(dispatch) {
     return({
-        fetchPosts: () => dispatch(fetchPosts())
+        fetchPosts: () => dispatch(fetchPosts()),
+        fetchCategories: () => dispatch(fetchCategories()),
     })
 }
 
