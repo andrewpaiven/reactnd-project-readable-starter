@@ -26,16 +26,12 @@ function reducer(state = initialState,action) {
             }
 
         case VOTE_POST_UP:
-
-            //TODO FIND A SMART WAY TO SIMPLIFY THIS !
-            let x = _.values(state.postList)
-            let y = [...x,action.post]
-            let z = _.mapKeys(y,'id')
-            let postList = { postList: z}
             return {
                 ...state,
-               ['postList']: z
-
+               postList: {
+                   ...state.postList,
+                   [action.post.id]: action.post
+               }
             }
 
         default:
