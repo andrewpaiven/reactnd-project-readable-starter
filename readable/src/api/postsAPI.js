@@ -11,7 +11,7 @@ const headers = {
 
 export const getAll = () => (
     fetch(`${api}/posts/`, {headers})
-        .then(res=>res.json())
+        .then(res=> res.json())
 )
 
 export const upVote = (id) => {
@@ -20,12 +20,12 @@ export const upVote = (id) => {
         option: 'upVote'
     }
 
-    fetch(`${api}/posts/${id}`, {
+    //Must return the promise otherwise will throw an undefined error
+    return fetch(`${api}/posts/${id}`, {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(postData)
-    })
-        .then(res=>res.json())
+    }).then(res=>res.json())
 }
 
 export const downVote = (id) => {
@@ -34,10 +34,11 @@ export const downVote = (id) => {
         option: "downVote"
     }
 
-    fetch(`${api}/posts/${id}`, {
+    //Must return the promise otherwise will throw an undefined error
+    return fetch(`${api}/posts/${id}`, {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(postData)
-    })
+    }).then(res=>res.json())
 
 }

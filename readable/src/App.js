@@ -5,6 +5,7 @@ import PostList from "./components/PostList"
 import { connect } from 'react-redux'
 import { fetchPosts } from './actions/PostsActions'
 import { fetchCategories} from './actions/CategoriesActions'
+import _ from 'lodash'
 
 class App extends Component {
 
@@ -31,8 +32,8 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    categories: state.categories,
-    postList: state.postList,
+    categories: _.values(state.categories),
+    postList: _.values(state.postList),
     currentTab: state.currentTab,
 })
 
