@@ -3,6 +3,9 @@
  */
 import React, { Component } from 'react';
 import Voter from './Voter.js'
+import { connect } from 'react-redux'
+import { displayPostDetails } from '../actions/PostsActions'
+import { Link } from 'react-router-dom'
 
 class Post extends Component {
 
@@ -15,7 +18,9 @@ class Post extends Component {
     render() {
         return(
             <div className="postDiv">
-                <h1 className="postTitle">{`${this.props.title}`}</h1>
+                <h1 className="postTitle" onClick={()=>this.props.displayPostDetail(this.props.id)}>
+                    <Link to={`/postDetail/${this.props.id}`} className="postTitle" style={{'text-decoration':'none','color':'inherit'}}> {`${this.props.title}`}</Link>
+                </h1>
                 <h2 className="postAuthor">{`by ${this.props.author}`}</h2>
                 <Voter postId={this.props.id} voteScore={this.props.voteScore}/>
                 <p className="postContent">{`${this.props.body}`}</p>
@@ -27,4 +32,8 @@ class Post extends Component {
     }
 }
 
-export default Post
+const mapDispatchToProps = () => dispatch => ({
+    displayPostDetail: (id) => dispatch(displayPostDetails(id))
+})
+
+export default connect(null,mapDispatchToProps)(Post)

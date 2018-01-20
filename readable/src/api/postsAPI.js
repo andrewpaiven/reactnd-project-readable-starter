@@ -11,7 +11,12 @@ const headers = {
 
 export const getAll = () => (
     fetch(`${api}/posts/`, {headers})
-        .then(res=> res.json())
+        .then(res=>res.json())
+)
+
+export const getByCategory = (category) => (
+    fetch(`${api}/${category}/posts`,{headers})
+        .then(res=>res.json())
 )
 
 export const upVote = (id) => {

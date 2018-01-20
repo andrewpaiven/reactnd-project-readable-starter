@@ -3,6 +3,8 @@
  */
 import React, { Component } from 'react'
 import Post from './Post'
+import { connect } from 'react-redux'
+import _ from 'lodash'
 
 class PostList extends Component {
     render() {
@@ -25,4 +27,8 @@ class PostList extends Component {
     }
 }
 
-export default PostList
+const mapStateToProps = state => ({
+    postList: _.values(state.postList)
+})
+
+export default connect(mapStateToProps,null)(PostList)

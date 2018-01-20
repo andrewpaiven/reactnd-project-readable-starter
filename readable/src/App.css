@@ -66,6 +66,7 @@
   text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
   margin-bottom: 2px;
 
+
 }
 
 .postAuthor {
@@ -152,6 +153,11 @@
 }
 
 .menuItem:hover {
+   background-color: ghostwhite;
+   color: black;
+ }
+
+.menuItem:hover a{ /* Hack to ensure that enclosuring li makes anchor menu item to hover as well*/
   background-color: ghostwhite;
   color: black;
 }
@@ -167,5 +173,12 @@
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
+
+/* Post Detail */
+.postDetailContainer {
+  margin-left: 200px;
+  background-color: white;
+}
+
 
 
