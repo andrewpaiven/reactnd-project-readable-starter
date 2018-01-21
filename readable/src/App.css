@@ -65,8 +65,6 @@
   text-align: left;
   text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
   margin-bottom: 2px;
-
-
 }
 
 .postAuthor {
@@ -91,7 +89,6 @@
 .postDelete {
   margin-bottom: 10px;
   margin-right: 10px;
-  float: left;
   background-color: darkred;
   color: white;
   font-size: 12px;
@@ -108,7 +105,6 @@
 .postEdit {
   margin-bottom: 10px;
   margin-right: 10px;
-  float: left;
   background-color: steelblue;
   color: white;
   font-size: 12px;
@@ -180,5 +176,92 @@
   background-color: white;
 }
 
+.noComments {
+  clear: left;
+  margin-top: 15px;
+}
 
+.commentDiv{
+  border: 1px solid black;
+  padding: 10px;
+  font-size: 12px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.commentAuthor {
+  margin-top: 10px;
+}
+
+.commentModal {
+  width: 600px;
+  height: 250px;
+  margin: auto;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid black;
+  margin-top: 100px;
+  font-family: 'Raleway';
+}
+
+.bodyPostModal {
+  width: 80%;
+  height: 100px;
+  margin-bottom: 20px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.authorPostModal {
+  width: 100px;
+  height: 20px;
+  margin-bottom: 20px;
+  display: inline-block;
+  clear: right;
+}
+
+.commentModalLabel {
+  width: 100px;
+  display: inline-block;
+}
+
+.commentSubmitButton {
+  margin-bottom: 10px;
+  margin-right: 10px;
+  background-color: steelblue;
+  color: white;
+  font-size: 12px;
+  border: 1px solid #c5c5c5;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100px;
+  height: 20px;
+}
+
+.commentCancelButton {
+  margin-bottom: 10px;
+  margin-right: 10px;
+  background-color: steelblue;
+  color: white;
+  font-size: 12px;
+  border: 1px solid #c5c5c5;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100px;
+  height: 20px;
+}
+
+.commentPostTitle {
+  font-size: 30px;
+  text-align: left;
+  text-shadow: 2px 2px 3px rgba(255,255,255,0.1);
+  margin-bottom: 2px;
+  margin-top: 0px;
+}
 

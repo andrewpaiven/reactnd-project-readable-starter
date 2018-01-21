@@ -2,7 +2,7 @@
  * Created by apaivaer on 19/12/2017.
  */
 import React, { Component } from 'react';
-import Voter from './Voter.js'
+import Voter from './PostVoter.js'
 import { connect } from 'react-redux'
 import { displayPostDetails } from '../actions/PostsActions'
 import { Link } from 'react-router-dom'

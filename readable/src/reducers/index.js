@@ -2,7 +2,16 @@
  * Created by apaivaer on 20/12/2017.
  */
 import _ from 'lodash'
-import { RECEIVE_ALL_POSTS, RECEIVE_POSTS_BY_CATEGORY, DISPLAY_POST_DETAILS, VOTE_POST_UP, VOTE_POST_DOWN } from "../actions/PostsActions"
+import {
+    RECEIVE_ALL_POSTS,
+    RECEIVE_POSTS_BY_CATEGORY,
+    DISPLAY_POST_DETAILS,
+    VOTE_POST_UP,
+    VOTE_POST_DOWN,
+    RECEIVE_POST_COMMENTS,
+    VOTE_COMMENT_UP,
+    VOTE_COMMENT_DOWN,
+} from "../actions/PostsActions"
 import { RECEIVE_ALL_CATEGORIES } from "../actions/CategoriesActions"
 const initialState = {
     postList: [],
@@ -54,6 +63,30 @@ function reducer(state = initialState,action) {
                 postList: {
                     ...state.postList,
                     [action.post.id]: action.post
+                }
+            }
+
+        case RECEIVE_POST_COMMENTS:
+            return {
+                ...state,
+                postDetailComments: _.mapKeys(action.comments,'id')
+            }
+
+        case VOTE_COMMENT_UP:
+            return {
+                ...state,
+                postDetailComments: {
+                    ...state.postDetailComments,
+                    [action.comment.id]: action.comment
+                }
+            }
+
+        case VOTE_COMMENT_DOWN:
+            return {
+                ...state,
+                postDetailComments: {
+                    ...state.postDetailComments,
+                    [action.comment.id]: action.comment
                 }
             }
 
