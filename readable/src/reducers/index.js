@@ -11,6 +11,7 @@ import {
     RECEIVE_POST_COMMENTS,
     VOTE_COMMENT_UP,
     VOTE_COMMENT_DOWN,
+    POST_COMMENT,
 } from "../actions/PostsActions"
 import { RECEIVE_ALL_CATEGORIES } from "../actions/CategoriesActions"
 const initialState = {
@@ -82,6 +83,15 @@ function reducer(state = initialState,action) {
             }
 
         case VOTE_COMMENT_DOWN:
+            return {
+                ...state,
+                postDetailComments: {
+                    ...state.postDetailComments,
+                    [action.comment.id]: action.comment
+                }
+            }
+
+        case POST_COMMENT:
             return {
                 ...state,
                 postDetailComments: {

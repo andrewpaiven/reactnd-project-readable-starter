@@ -7,7 +7,7 @@ import Voter from './PostVoter'
 import CommentVoter from './CommentVoter'
 import { fetchPostComments, postComment } from '../actions/PostsActions'
 import _ from 'lodash'
-import ReactModal from 'react-modal'
+import uuidv1 from 'uuid'
 
 
 class PostDetail extends Component {
@@ -22,11 +22,11 @@ class PostDetail extends Component {
 
     handleCommentSubmit = (event) => {
         event.preventDefault()
-        this.props.postComment(123456,1234567,this.state.commentBody,this.state.commentAuthor,this.props.postDetail.id)
+        this.props.postComment(uuidv1.v1(),Date.now(),this.state.commentBody,this.state.commentAuthor,this.props.postDetail.id)
     }
 
     handleNewCommentInputChange = (event) => {
-        const targetName = event.name
+        const targetName = event.target.name
         switch(targetName) {
             case 'commentBody':
                 this.setState({
@@ -66,8 +66,28 @@ class PostDetail extends Component {
                     {this.props.postDetailComments.length !== 0 &&
                         <div>
                             <h3>Comments</h3>
-                            <a onClick={()=>(this.setState({commentModalOn: true}))}>Add new comment</a>
                         </div>
+                    }
+                    <div>
+                        <a onClick={()=>(this.setState({commentModalOn: true}))}>Add new comment</a>
+                    </div>
+
+                    {this.state.commentModalOn &&
+                    <div style={{'margin-top':'20px'}}>
+                        <h5 className='commentPostTitle'>New Comment</h5>
+                        <form onSubmit={this.handleCommentSubmit}>
+                            <p style={{'verticalAlign':'center'}}>
+                                <label className="commentModalLabel">Comment</label>
+                                <textarea  style={{'overflow' :'hidden'}} className="bodyPostModal" type="text" name="commentBody" onChange={this.handleNewCommentInputChange}/>
+                            </p>
+                            <label className="commentModalLabel">Author</label>
+                            <input className="authorPostModal" type="text" name="commentAuthor" onChange={this.handleNewCommentInputChange}/>
+                            <div style={{'text-align':'center'}}>
+                                <input className="commentSubmitButton" type="submit" value="Submit"/>
+                                <button className="commentCancelButton" onClick={this.handleCloseModal}>Cancel</button>
+                            </div>
+                        </form>
+                    </div>
                     }
                     {this.props.postDetailComments.length !== 0 &&
                         this.props.postDetailComments.map((comment)=>(
@@ -80,23 +100,6 @@ class PostDetail extends Component {
                     }
                     {this.props.postDetailComments.length === 0 &&
                     <h3 className="noComments">No comments for this post</h3>}
-                    <ReactModal
-                        isOpen={this.state.commentModalOn}
-                        className="commentModal">
-                        <h5 className='commentPostTitle'>New Comment</h5>
-                        <form onSubmit={this.handleCommentSubmit}>
-                            <p style={{'verticalAlign':'center'}}>
-                            <label className="commentModalLabel">Comment</label>
-                            <textarea  style={{'overflow' :'hidden'}} className="bodyPostModal" type="text" name="commentBody" onChange={this.handleNewCommentInputChange}/>
-                            </p>
-                            <label className="commentModalLabel">Author</label><input className="authorPostModal" type="text" name="commentAuthor"/>
-                            <div style={{'text-align':'center'}}>
-                                <input className="commentSubmitButton" type="submit" value="Submit"/>
-                                <button className="commentCancelButton" onClick={this.handleCloseModal}>Cancel</button>
-                            </div>
-                        </form>
-
-                    </ReactModal>
              </div>
             </div>
         )

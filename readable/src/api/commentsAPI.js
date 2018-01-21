@@ -26,7 +26,7 @@ export const postComment = (id,timestamp,body,author,parentId) => {
 
     return fetch(`${api}/comments`,{
         method: 'POST',
-        header: headers,
+        headers: headers,
         body: JSON.stringify(postData)
         }).then(res=>res.json())
 
