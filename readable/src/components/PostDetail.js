@@ -59,7 +59,7 @@ class PostDetail extends Component {
                 <div className="postDiv">
                     <h1 className="postTitle">{`${this.props.postDetail.title}`}</h1>
                     <h2 className="postAuthor">{`by ${this.props.postDetail.author}`}</h2>
-                    <Voter postId={this.props.id} voteScore={this.props.postDetail.voteScore}/>
+                    <Voter postId={this.props.postDetail.id} voteScore={this.props.postDetail.voteScore}/>
                     <p className="postContent">{`${this.props.postDetail.body}`}</p>
                     <button className="postEdit">Edit Post</button>
                     <button className="postDelete">Delete Post</button>

@@ -50,6 +50,16 @@ function reducer(state = initialState,action) {
             }
 
         case VOTE_POST_UP:
+            if(state.postDetail && state.postDetail.id === action.post.id) {
+                return {
+                    ...state,
+                    postList: {
+                        ...state.postList,
+                        [action.post.id]: action.post
+                    },
+                    postDetail: action.post
+                }
+            }
             return {
                 ...state,
                postList: {
@@ -59,6 +69,16 @@ function reducer(state = initialState,action) {
             }
 
         case VOTE_POST_DOWN:
+            if(state.postDetail && state.postDetail.id === action.post.id) {
+                return {
+                    ...state,
+                    postList: {
+                        ...state.postList,
+                        [action.post.id]: action.post
+                    },
+                    postDetail: action.post
+                }
+            }
             return {
                 ...state,
                 postList: {
