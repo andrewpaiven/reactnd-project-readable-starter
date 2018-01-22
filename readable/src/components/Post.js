@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { displayPostDetails } from '../actions/PostsActions'
 import { Link } from 'react-router-dom'
 
+
 class Post extends Component {
 
     processTime = (unixTime) => {
@@ -28,6 +29,7 @@ class Post extends Component {
                 <button className="postEdit">Edit Post</button>
                 <button className="postDelete">Delete Post</button>
             </div>
+
         )
     }
 }

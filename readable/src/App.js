@@ -4,14 +4,32 @@ import Menu from "./components/Menu.js"
 import PostList from "./components/PostList"
 import PostDetail from "./components/PostDetail"
 import { connect } from 'react-redux'
-import { fetchPosts } from './actions/PostsActions'
+import { fetchAllPosts } from './actions/PostsActions'
 import _ from 'lodash'
 import { Route } from 'react-router-dom'
+import AllPostsPage from './components/AllPostsPage'
+
 
 class App extends Component {
 
+    state = {
+        newPostModalOpen: false
+    }
+
+    handleOpenNewPostModal = () => {
+        this.setState({
+            newPostModalOpen: true
+        })
+    }
+
+    handleCloseNewPostModal = () => {
+        this.setState({
+            newPostModalOpen: false
+        })
+    }
+
     componentDidMount() {
-        this.props.fetchPosts()
+        this.props.fetchAllPosts()
     }
 
     render() {
@@ -19,22 +37,12 @@ class App extends Component {
             <div>
                 {/* Main Page */}
                 <Route exact path="/" render={()=>(
-                    <div className="container">
-                        <Menu/>
-                        <span className="headerPostList">{this.props.categoryFilter}</span>
-                        <button className="newPost">New Post</button>
-                        <PostList/>
-                    </div>
+                   <AllPostsPage/>
                 )}/>
 
                 {/* Posts of category*/}
                 <Route exact path="/category/:category" render={()=>(
-                    <div className="container">
-                        <Menu/>
-                        <span className="headerPostList">{this.props.categoryFilter}</span>
-                        <button className="newPost">New Post</button>
-                        <PostList/>
-                    </div>
+                    <AllPostsPage/>
                 )}/>
 
                 {/* Post Detail Page */}
@@ -64,7 +72,7 @@ const mapStateToProps = (state) => ({
 
 function mapDispatchToProps(dispatch) {
     return({
-        fetchPosts: () => dispatch(fetchPosts()),
+        fetchAllPosts: () => dispatch(fetchAllPosts()),
     })
 }
 

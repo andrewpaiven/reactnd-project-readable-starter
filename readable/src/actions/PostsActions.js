@@ -22,7 +22,7 @@ export const receiveAllPosts = posts =>  ({
     category: 'All Posts',
 })
 
-export const fetchPosts = () => dispatch => (
+export const fetchAllPosts = () => dispatch => (
     PostsAPI.getAll()
         .then(posts => dispatch(receiveAllPosts(posts)))
 )

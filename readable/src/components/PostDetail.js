@@ -69,7 +69,7 @@ class PostDetail extends Component {
                         </div>
                     }
                     <div>
-                        <a onClick={()=>(this.setState({commentModalOn: true}))}>Add new comment</a>
+                        <a className="newCommentTitle" onClick={()=>(this.setState({commentModalOn: true}))}>Add new comment</a>
                     </div>
 
                     {this.state.commentModalOn &&

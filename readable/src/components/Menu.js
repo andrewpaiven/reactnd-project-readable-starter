@@ -6,7 +6,7 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import { fetchCategories } from '../actions/CategoriesActions'
 import { fetchPostsByCategory } from '../actions/PostsActions'
-import { fetchPosts } from '../actions/PostsActions'
+import { fetchAllPosts } from '../actions/PostsActions'
 import { Link } from 'react-router-dom'
 
 class Menu extends Component {
@@ -19,7 +19,7 @@ class Menu extends Component {
         return (
         <div className="menuContainer">
             <ul className="menu">
-                <li className="menuItem" style={{'font-family': 'Pacifico', 'font-size':'40px'}} onClick={()=>this.props.fetchPosts()}>
+                <li className="menuItem" style={{'font-family': 'Pacifico', 'font-size':'40px'}} onClick={()=>this.props.fetchAllPosts()}>
                     <Link style={{'font-family': 'Pacifico', 'font-size':'40px',textDecoration: 'none', color:'inherit'}} to="/">Readable</Link>
                 </li>
                 {this.props.categories.map((category)=>(
@@ -40,7 +40,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = () => dispatch => ({
     fetchCategories: () => dispatch(fetchCategories()),
     fetchPostsByCategory: (category) => dispatch(fetchPostsByCategory(category)),
-    fetchPosts: () => dispatch(fetchPosts())
+    fetchAllPosts: () => dispatch(fetchAllPosts())
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Menu)
