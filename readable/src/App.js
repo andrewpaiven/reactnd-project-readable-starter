@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Menu from "./components/Menu.js"
-import PostList from "./components/PostList"
 import PostDetail from "./components/PostDetail"
 import { connect } from 'react-redux'
 import { fetchAllPosts } from './actions/PostsActions'
@@ -11,22 +10,6 @@ import AllPostsPage from './components/AllPostsPage'
 
 
 class App extends Component {
-
-    state = {
-        newPostModalOpen: false
-    }
-
-    handleOpenNewPostModal = () => {
-        this.setState({
-            newPostModalOpen: true
-        })
-    }
-
-    handleCloseNewPostModal = () => {
-        this.setState({
-            newPostModalOpen: false
-        })
-    }
 
     componentDidMount() {
         this.props.fetchAllPosts()
@@ -53,11 +36,7 @@ class App extends Component {
                     </div>
                 )}/>
 
-
             </div>
-
-
-
         )
 
     }

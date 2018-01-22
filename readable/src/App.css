@@ -207,7 +207,6 @@
 .bodyPostModal {
   width: 80%;
   height: 100px;
-  margin-bottom: 20px;
   display: inline-block;
   vertical-align: middle;
 }
@@ -268,4 +267,43 @@
 .newCommentTitle {
   cursor:pointer;
 }
+
+/* New Post */
+.newPostLabelInputWrapper {
+    display:flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.newPostModalLabel {
+    width: 100px;
+    display: inline-block;
+}
+
+.newPostTextAreaTitle {
+    width: 650px;
+    height: 30px;
+}
+
+.newPostCategorySelect {
+    width: 100px;
+    height: 30px;
+}
+
+.newPostTextAreaAuthor {
+    width: 300px;
+    height: 30px;
+}
+
+.newPostTextAreaBody {
+    width: 650px;
+    height: 100px;
+}
+
+.newPostModalDiv {
+    font-family: 'Raleway';
+}
+
+
 
