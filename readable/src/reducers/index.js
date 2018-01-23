@@ -12,6 +12,8 @@ import {
     VOTE_COMMENT_UP,
     VOTE_COMMENT_DOWN,
     POST_COMMENT,
+    GET_NEW_POST,
+    DELETE_POST,
 } from "../actions/PostsActions"
 import { RECEIVE_ALL_CATEGORIES } from "../actions/CategoriesActions"
 const initialState = {
@@ -47,6 +49,15 @@ function reducer(state = initialState,action) {
             return {
                 ...state,
                 postDetail: state.postList[action.id]
+            }
+
+        case GET_NEW_POST:
+            return {
+                ...state,
+                postList: {
+                    ...state.postList,
+                    [action.post.id]: action.post
+                }
             }
 
         case VOTE_POST_UP:
@@ -85,6 +96,17 @@ function reducer(state = initialState,action) {
                     ...state.postList,
                     [action.post.id]: action.post
                 }
+            }
+
+        case DELETE_POST:
+            let postList = {
+                ...state.postList
+            }
+            delete postList[action.post.id]
+
+            return {
+                ...state,
+                postList: postList
             }
 
         case RECEIVE_POST_COMMENTS:

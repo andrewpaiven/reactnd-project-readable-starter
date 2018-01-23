@@ -11,16 +11,18 @@ class PostList extends Component {
         return(
             <div className="postList">
                 {this.props.postList.map((post)=>(
-                    <Post
-                        id={post.id}
-                        title={post.title}
-                        author={post.author}
-                        body={post.body}
-                        category={post.category}
-                        timestamp={post.timestamp}
-                        voteScore={post.voteScore}
-                        deleted={post.deleted}
-                    />
+                    <div className="postDiv">
+                        <Post
+                            id={post.id}
+                            title={post.title}
+                            author={post.author}
+                            body={post.body}
+                            category={post.category}
+                            timestamp={post.timestamp}
+                            voteScore={post.voteScore}
+                            deleted={post.deleted}
+                            />
+                    </div>
                 ))}
             </div>
         )

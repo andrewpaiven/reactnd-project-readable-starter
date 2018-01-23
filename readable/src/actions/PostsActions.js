@@ -14,6 +14,8 @@ export const RECEIVE_POST_COMMENTS = 'RECEIVE_POST_COMMENTS'
 export const VOTE_COMMENT_UP = 'VOTE_COMMENT_UP'
 export const VOTE_COMMENT_DOWN = 'VOTE_COMMENT_DOWN'
 export const POST_COMMENT = 'POST_COMMENT'
+export const GET_NEW_POST = 'GET_NEW_POST'
+export const DELETE_POST = 'DELETE_POST'
 
 // Receive all posts
 export const receiveAllPosts = posts =>  ({
@@ -27,8 +29,18 @@ export const fetchAllPosts = () => dispatch => (
         .then(posts => dispatch(receiveAllPosts(posts)))
 )
 
-// Receive posts by category
+// New post
+export const getNewPost = post => ({
+    type: GET_NEW_POST,
+    post
+})
 
+export const newPost = (id,timestamp,title,body,author,category) => dispatch => {
+    PostsAPI.newPost(id,timestamp,title,body,author,category)
+        .then(post => dispatch(getNewPost(post)))
+}
+
+// Receive posts by category
 export const receivePostsByCategory = (category,posts) => ({
     type: RECEIVE_POSTS_BY_CATEGORY,
     posts,
@@ -45,6 +57,18 @@ export const fetchPostsByCategory = (category) => dispatch => {
             .then(posts => dispatch(receiveAllPosts(posts)))
     }
 }
+
+// Delete Post
+export const deletePostAction = post => ({
+    type: DELETE_POST,
+    post
+})
+
+export const deletePost = id => dispatch => {
+    PostsAPI.deletePost(id)
+        .then(post=>dispatch(deletePostAction(post)))
+}
+
 
 // UpVote
 export const voteUpPostAction = (post) => ({

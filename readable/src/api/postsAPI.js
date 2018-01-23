@@ -19,6 +19,35 @@ export const getByCategory = (category) => (
         .then(res=>res.json())
 )
 
+//New post
+export const newPost = (id,timestamp,title,body,author,category) => {
+    const postData = {
+        id: id,
+        timestamp: timestamp,
+        title: title,
+        body: body,
+        author: author,
+        category: category
+    }
+    return(
+        fetch(`${api}/posts`,{
+            method: 'POST',
+            headers: headers,
+            body: JSON.stringify(postData)
+        }).then(res=>res.json())
+    )
+}
+export const deletePost = (id) => {
+    return (
+        fetch(`${api}/posts/${id}`,{
+        method: 'DELETE',
+        headers: headers
+    }).then(res=>res.json()))
+}
+// Delete Post
+
+
+//Votes
 export const upVote = (id) => {
 
     const postData = {

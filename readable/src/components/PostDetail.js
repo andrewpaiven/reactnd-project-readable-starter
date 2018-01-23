@@ -8,6 +8,7 @@ import CommentVoter from './CommentVoter'
 import { fetchPostComments, postComment } from '../actions/PostsActions'
 import _ from 'lodash'
 import uuidv1 from 'uuid'
+import Post from './Post'
 
 
 class PostDetail extends Component {
@@ -57,16 +58,20 @@ class PostDetail extends Component {
         return(
             <div className="postList">
                 <div className="postDiv">
-                    <h1 className="postTitle">{`${this.props.postDetail.title}`}</h1>
-                    <h2 className="postAuthor">{`by ${this.props.postDetail.author}`}</h2>
-                    <Voter postId={this.props.postDetail.id} voteScore={this.props.postDetail.voteScore}/>
-                    <p className="postContent">{`${this.props.postDetail.body}`}</p>
-                    <button className="postEdit">Edit Post</button>
-                    <button className="postDelete">Delete Post</button>
+                    <Post
+                        id={this.props.postDetail.id}
+                        title={this.props.postDetail.title}
+                        author={this.props.postDetail.author}
+                        body={this.props.postDetail.body}
+                        category={this.props.postDetail.category}
+                        timestamp={this.props.postDetail.timestamp}
+                        voteScore={this.props.postDetail.voteScore}
+                        deleted={this.props.postDetail.deleted}
+                    />
                     {this.props.postDetailComments.length !== 0 &&
-                        <div>
-                            <h3>Comments</h3>
-                        </div>
+                    <div>
+                        <h3>Comments</h3>
+                    </div>
                     }
                     <div>
                         <a className="newCommentTitle" onClick={()=>(this.setState({commentModalOn: true}))}>Add new comment</a>
@@ -90,17 +95,17 @@ class PostDetail extends Component {
                     </div>
                     }
                     {this.props.postDetailComments.length !== 0 &&
-                        this.props.postDetailComments.map((comment)=>(
-                       <div className="commentDiv">
-                           <p>Comment by {comment.author} on {this.processTime(comment.timestamp)}</p>
-                           <p>{comment.body}</p>
-                           <CommentVoter commentId={comment.id} voteScore={comment.voteScore}/>
-                       </div>
-                        ))
+                    this.props.postDetailComments.map((comment)=>(
+                        <div className="commentDiv">
+                            <p>Comment by {comment.author} on {this.processTime(comment.timestamp)}</p>
+                            <p>{comment.body}</p>
+                            <CommentVoter commentId={comment.id} voteScore={comment.voteScore}/>
+                        </div>
+                    ))
                     }
                     {this.props.postDetailComments.length === 0 &&
                     <h3 className="noComments">No comments for this post</h3>}
-             </div>
+                </div>
             </div>
         )
 

@@ -6,8 +6,9 @@ import PostList from './PostList'
 import Menu from './Menu'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import { fetchAllPosts, fetchPostsByCategory } from '../actions/PostsActions'
+import { fetchAllPosts, fetchPostsByCategory, newPost} from '../actions/PostsActions'
 import Modal from 'react-modal'
+import uuidv1 from 'uuid'
 
 class AllPostsPage extends Component {
 
@@ -31,8 +32,15 @@ class AllPostsPage extends Component {
     }
 
     handleOpenNewPostModal = () => {
+        this.props.categoryFilter === 'All Posts' ?
+            this.setState({newPostCategory: this.props.categories[0].name}) :
+            this.setState({newPostCategory: this.props.categoryFilter})
+
         this.setState({
-            openNewPostModal: true
+            openNewPostModal: true,
+            newPostTitle: null,
+            newPostAuthor: null,
+            newPostBody: null,
         })
     }
 
@@ -43,7 +51,6 @@ class AllPostsPage extends Component {
     }
 
     handleNewPostInputChange = (event) => {
-        event.preventDefault()
         const value = event.target.value
         switch(event.target.name) {
             case 'postTitle':
@@ -72,6 +79,11 @@ class AllPostsPage extends Component {
         return
     }
 
+    handleNewPostSubmit = (event) => {
+        event.preventDefault()
+        this.props.newPost(uuidv1.v1(),Date.now(),this.state.newPostTitle,this.state.newPostBody,this.state.newPostAuthor,this.state.newPostCategory)
+    }
+
     componentDidMount() {
         if(this.props.categoryFilter !== 'All Posts') fetchPostsByCategory(this.props.categoryFilter)
         else this.props.fetchAllPosts()
@@ -87,7 +99,7 @@ class AllPostsPage extends Component {
                 <PostList/>
                 <Modal isOpen={this.state.openNewPostModal} style={this.modalStyle}>
                     <div className="newPostModalDiv">
-                        <form onSubmit={this.handleCommentSubmit}>
+                        <form onSubmit={this.handleNewPostSubmit}>
                             <h5 className='commentPostTitle'>New Post</h5>
                             <div className="newPostLabelInputWrapper">
                                 <label className="newPostModalLabel">Post Title</label>
@@ -132,6 +144,7 @@ function mapDispatchToProps(dispatch) {
     return({
         fetchAllPosts: () => dispatch(fetchAllPosts()),
         fetchPostsByCategory: (category) => dispatch(fetchPostsByCategory(category)),
+        newPost: (id,timestamp,title,body,author,category) => dispatch(newPost(id,timestamp,title,body,author,category))
     })
 }
 

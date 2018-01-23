@@ -6,9 +6,14 @@ import Voter from './PostVoter.js'
 import { connect } from 'react-redux'
 import { displayPostDetails } from '../actions/PostsActions'
 import { Link } from 'react-router-dom'
+import { deletePost } from '../actions/PostsActions'
 
 
 class Post extends Component {
+
+    handlePostDeletion = () => {
+        this.props.deletePost(this.props.id)
+    }
 
     processTime = (unixTime) => {
         let timeStamp = new Date(unixTime);
@@ -18,7 +23,7 @@ class Post extends Component {
 
     render() {
         return(
-            <div className="postDiv">
+            <div>
                 <h1 className="postTitle" onClick={()=>this.props.displayPostDetail(this.props.id)}>
                     <Link to={`/postDetail/${this.props.id}`} className="postTitle" style={{'text-decoration':'none','color':'inherit'}}> {`${this.props.title}`}</Link>
                 </h1>
@@ -27,7 +32,7 @@ class Post extends Component {
                 <p className="postContent">{`${this.props.body}`}</p>
                 <span className="postTimeStampAndCategory">{`Posted in ${this.props.category} on ${this.processTime(this.props.timestamp)}`}</span>
                 <button className="postEdit">Edit Post</button>
-                <button className="postDelete">Delete Post</button>
+                <button onClick={this.handlePostDeletion} className="postDelete">Delete Post</button>
             </div>
 
         )
@@ -35,7 +40,8 @@ class Post extends Component {
 }
 
 const mapDispatchToProps = () => dispatch => ({
-    displayPostDetail: (id) => dispatch(displayPostDetails(id))
+    displayPostDetail: id => dispatch(displayPostDetails(id)),
+    deletePost: id => dispatch(deletePost(id))
 })
 
 export default connect(null,mapDispatchToProps)(Post)
