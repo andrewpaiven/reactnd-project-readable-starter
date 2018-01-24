@@ -14,11 +14,16 @@ import {
     POST_COMMENT,
     GET_NEW_POST,
     DELETE_POST,
+    OPEN_POST_CONTROL,
+    EDIT_POST
 } from "../actions/PostsActions"
 import { RECEIVE_ALL_CATEGORIES } from "../actions/CategoriesActions"
 const initialState = {
     postList: [],
-    categories: []
+    categories: [],
+    postControl: {
+        showModal: false
+    }
 }
 
 function reducer(state = initialState,action) {
@@ -142,11 +147,34 @@ function reducer(state = initialState,action) {
                 }
             }
 
+        case OPEN_POST_CONTROL:
+            return {
+                ...state,
+                postControl: {
+                    ...state.postControl,
+                    'showModal': action.showModal,
+                    'postTitle': action.postTitle,
+                    'postAuthor': action.postAuthor,
+                    'postBody': action.postBody,
+                    'postCategory': action.postCategory,
+                    'postId': action.postId,
+                    'mode': action.mode
+                }
+            }
+
+        case EDIT_POST:
+            return {
+                ...state,
+                postList: {
+                    ...state.postList,
+                    [action.post.id]: action.post
+                }
+
+            }
+
         default:
             return state
 
-        //Return new state
-        return state
     }
 }
 

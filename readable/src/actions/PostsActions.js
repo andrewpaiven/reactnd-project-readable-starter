@@ -16,6 +16,8 @@ export const VOTE_COMMENT_DOWN = 'VOTE_COMMENT_DOWN'
 export const POST_COMMENT = 'POST_COMMENT'
 export const GET_NEW_POST = 'GET_NEW_POST'
 export const DELETE_POST = 'DELETE_POST'
+export const OPEN_POST_CONTROL = 'OPEN_POST_CONTROL'
+export const EDIT_POST = 'EDIT_POST'
 
 // Receive all posts
 export const receiveAllPosts = posts =>  ({
@@ -141,3 +143,27 @@ export const postComment = (id,timestamp,body,author,parentId) => dispatch => {
     CommentsAPI.postComment(id,timestamp,body,author,parentId)
         .then((comment) => dispatch(postCommentAction(comment)))
 }
+
+//Open post control
+export const openPostControl = (showModal,postTitle,postAuthor,postBody,postCategory,postId,mode) => ({
+    type: OPEN_POST_CONTROL,
+    showModal,
+    postTitle,
+    postAuthor,
+    postBody,
+    postCategory,
+    postId,
+    mode,
+})
+
+//Edit post
+export const editPostAction = (post)  => ({
+    type: EDIT_POST,
+    post
+})
+
+export const editPost = (id,title,body) => dispatch => {
+    PostsAPI.editPost(id,title,body)
+        .then(post=>dispatch(editPostAction(id,title,body)))
+}
+

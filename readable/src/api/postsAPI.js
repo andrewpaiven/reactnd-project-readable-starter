@@ -37,6 +37,23 @@ export const newPost = (id,timestamp,title,body,author,category) => {
         }).then(res=>res.json())
     )
 }
+
+//Edit post
+export const editPost = (id,title,body) => {
+    const postData = {
+        title: title,
+        body: body
+    }
+    return(
+        fetch(`${api}/posts/${id}`,{
+            method: 'PUT',
+            headers: headers,
+            body: JSON.stringify(postData)
+        }).then(res=>res.json())
+    )
+}
+
+// Delete Post
 export const deletePost = (id) => {
     return (
         fetch(`${api}/posts/${id}`,{
@@ -44,8 +61,6 @@ export const deletePost = (id) => {
         headers: headers
     }).then(res=>res.json()))
 }
-// Delete Post
-
 
 //Votes
 export const upVote = (id) => {
