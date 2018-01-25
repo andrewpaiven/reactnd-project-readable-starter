@@ -2,7 +2,7 @@
  * Created by apaivaer on 19/12/2017.
  */
 import React, { Component } from 'react';
-import Voter from './PostVoter.js'
+import PostVoter from './PostVoter.js'
 import { connect } from 'react-redux'
 import { displayPostDetails } from '../actions/PostsActions'
 import { Link } from 'react-router-dom'
@@ -36,7 +36,8 @@ class Post extends Component {
                     <Link to={`/postDetail/${this.props.id}`} className="postTitle" style={{'text-decoration':'none','color':'inherit'}}> {`${this.props.title}`}</Link>
                 </h1>
                 <h2 className="postAuthor">{`by ${this.props.author}`}</h2>
-                <Voter postId={this.props.id} voteScore={this.props.voteScore}/>
+                <p>{`Comments: ${this.props.commentCount}`}</p>
+                <PostVoter postId={this.props.id} voteScore={this.props.voteScore}/>
                 <p className="postContent">{`${this.props.body}`}</p>
                 <span className="postTimeStampAndCategory">{`Posted in ${this.props.category} on ${processTime(this.props.timestamp)}`}</span>
                 <button onClick={this.handlePostEdit} className="postEdit">Edit Post</button>

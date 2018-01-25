@@ -60,5 +60,28 @@ export const downVote = (id) => {
     }).then(res=>res.json())
 }
 
+// Delete Comment
+export const deleteComment = (id) => (
+        fetch(`${api}/comments/${id}`,{
+            method: 'DELETE',
+            headers: headers
+        }).then(res=>res.json())
+)
+
+// Edit comment
+export const editComment = (id,timestamp,body) => {
+    const postData = {
+        timestamp: timestamp,
+        body: body
+    }
+    return(
+        fetch(`${api}/comments/${id}`, {
+            method: 'PUT',
+            headers: headers,
+            body: JSON.stringify(postData)
+        }).then(res => res.json())
+    )
+}
+
 
 

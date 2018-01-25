@@ -3,27 +3,38 @@
  */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Voter from './PostVoter'
 import CommentVoter from './CommentVoter'
-import { fetchPostComments, postComment } from '../actions/PostsActions'
+import { fetchPostComments, postComment, openPostControl, deleteComment, editComment, openCommentEditorAction } from '../actions/PostsActions'
 import _ from 'lodash'
 import uuidv1 from 'uuid'
 import Post from './Post'
-
+import { processTime } from "../helpers/TimeFunctions"
+import PostControl from './PostControl'
+import CommentControl from './CommentControl'
 
 class PostDetail extends Component {
 
     state = {
-        commentModalOn: false
+        commentAddFieldsOn: false
     }
 
     handleCloseModal = () => {
-        this.setState({commentModalOn: false})
+        this.setState({commentAddFieldsOn: false})
     }
 
     handleCommentSubmit = (event) => {
         event.preventDefault()
         this.props.postComment(uuidv1.v1(),Date.now(),this.state.commentBody,this.state.commentAuthor,this.props.postDetail.id)
+        this.handleCloseModal()
+    }
+
+    handleEditComment = (author,body,id) => {
+        this.props.openCommentEditorAction(
+            true, //Show Modal
+            author,
+            body,
+            id
+        )
     }
 
     handleNewCommentInputChange = (event) => {
@@ -48,16 +59,11 @@ class PostDetail extends Component {
         this.props.fetchPostComments(this.props.postDetail.id)
     }
 
-    processTime = (unixTime) => {
-        let timeStamp = new Date(unixTime);
-        let timeStampString = `${timeStamp.getDate()}\\${timeStamp.getMonth()}\\${timeStamp.getYear()} @ ${timeStamp.toISOString().slice(-13, -5)}`
-        return timeStampString
-    }
-
     render() {
         return(
             <div className="postList">
                 <div className="postDiv">
+                    {this.props.postControl.showModal && <PostControl/>}
                     <Post
                         id={this.props.postDetail.id}
                         title={this.props.postDetail.title}
@@ -67,17 +73,19 @@ class PostDetail extends Component {
                         timestamp={this.props.postDetail.timestamp}
                         voteScore={this.props.postDetail.voteScore}
                         deleted={this.props.postDetail.deleted}
+                        commentCount={this.props.postDetail.commentCount}
                     />
+                    {this.props.commentControl.showModal && <CommentControl/>}
                     {this.props.postDetailComments.length !== 0 &&
                     <div>
                         <h3>Comments</h3>
                     </div>
                     }
                     <div>
-                        <a className="newCommentTitle" onClick={()=>(this.setState({commentModalOn: true}))}>Add new comment</a>
+                        <a className="newCommentTitle" onClick={()=>(this.setState({commentAddFieldsOn: true}))}>Add new comment</a>
                     </div>
 
-                    {this.state.commentModalOn &&
+                    {this.state.commentAddFieldsOn &&
                     <div style={{'margin-top':'20px'}}>
                         <h5 className='commentPostTitle'>New Comment</h5>
                         <form onSubmit={this.handleCommentSubmit}>
@@ -97,9 +105,11 @@ class PostDetail extends Component {
                     {this.props.postDetailComments.length !== 0 &&
                     this.props.postDetailComments.map((comment)=>(
                         <div className="commentDiv">
-                            <p>Comment by {comment.author} on {this.processTime(comment.timestamp)}</p>
+                            <p>Comment by {comment.author} on {processTime(comment.timestamp)}</p>
                             <p>{comment.body}</p>
                             <CommentVoter commentId={comment.id} voteScore={comment.voteScore}/>
+                            <button onClick={() => this.handleEditComment(comment.author,comment.body,comment.id)} className="commentEditButton">Edit</button>
+                            <button onClick={() => this.props.deleteComment(comment.id)} className="commentDeleteButton">Delete</button>
                         </div>
                     ))
                     }
@@ -114,12 +124,18 @@ class PostDetail extends Component {
 
 const mapStateToProps = state => ({
     postDetail: state.postDetail,
-    postDetailComments: _.values(state.postDetailComments)
+    postDetailComments: _.values(state.postDetailComments),
+    postControl: state.postControl,
+    commentControl: state.commentControl
 })
 
 const mapDispatchToProps = () => dispatch => ({
-    fetchPostComments: (id) => dispatch(fetchPostComments(id)),
-    postComment: (id,timestamp,body,author,parentId) => dispatch(postComment(id,timestamp,body,author,parentId))
+    fetchPostComments: id => dispatch(fetchPostComments(id)),
+    postComment: (id,timestamp,body,author,parentId) => dispatch(postComment(id,timestamp,body,author,parentId)),
+    openPostControl: (showModal,postTitle,postAuthor,postBody,postCategory,postId,mode) => dispatch(openPostControl(showModal,postTitle,postAuthor,postBody,postCategory,postId,mode)),
+    deleteComment: id => dispatch(deleteComment(id)),
+    editComment: (id,timestamp,body) => dispatch(editComment(id,timestamp,body)),
+    openCommentEditorAction: (showModal,author,body,id) => dispatch(openCommentEditorAction(showModal,author,body,id))
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(PostDetail)

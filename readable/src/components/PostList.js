@@ -10,6 +10,9 @@ class PostList extends Component {
     render() {
         return(
             <div className="postList">
+                {this.props.postList.length === 0 &&  <div className="postDiv">
+                    <h2>No posts to display ! :( </h2>
+                </div>}
                 {this.props.postList.map((post)=>(
                     <div className="postDiv">
                         <Post
@@ -21,6 +24,7 @@ class PostList extends Component {
                             timestamp={post.timestamp}
                             voteScore={post.voteScore}
                             deleted={post.deleted}
+                            commentCount={post.commentCount}
                             />
                     </div>
                 ))}

@@ -14,14 +14,20 @@ import {
     POST_COMMENT,
     GET_NEW_POST,
     DELETE_POST,
-    OPEN_POST_CONTROL,
-    EDIT_POST
+    POST_CONTROL,
+    EDIT_POST,
+    DELETE_COMMENT,
+    OPEN_COMMENT_EDITOR,
+    EDIT_COMMENT
 } from "../actions/PostsActions"
 import { RECEIVE_ALL_CATEGORIES } from "../actions/CategoriesActions"
 const initialState = {
     postList: [],
     categories: [],
     postControl: {
+        showModal: false
+    },
+    commentControl: {
         showModal: false
     }
 }
@@ -62,6 +68,9 @@ function reducer(state = initialState,action) {
                 postList: {
                     ...state.postList,
                     [action.post.id]: action.post
+                },
+                postControl: {
+                    showModal: false
                 }
             }
 
@@ -139,15 +148,46 @@ function reducer(state = initialState,action) {
             }
 
         case POST_COMMENT:
+            let commentCount = state.postDetail.commentCount + 1
             return {
                 ...state,
                 postDetailComments: {
                     ...state.postDetailComments,
                     [action.comment.id]: action.comment
+                },
+                postDetail: {
+                    ...state.postDetail,
+                    commentCount: commentCount
                 }
             }
 
-        case OPEN_POST_CONTROL:
+        case DELETE_COMMENT: {
+            let commentCount = state.postDetail.commentCount - 1
+            let postDetailComments = state.postDetailComments
+            delete postDetailComments[action.comment.id]
+            return {
+                ...state,
+                postDetailComments,
+                postDetail: {
+                    ...state.postDetail,
+                    commentCount: commentCount
+                }
+            }
+        }
+
+
+        case OPEN_COMMENT_EDITOR:
+            return {
+                ...state,
+                commentControl: {
+                    showModal: action.showModal,
+                    author: action.author,
+                    body: action.body,
+                    id: action.id
+                }
+            }
+
+        case POST_CONTROL:
             return {
                 ...state,
                 postControl: {
@@ -168,8 +208,21 @@ function reducer(state = initialState,action) {
                 postList: {
                     ...state.postList,
                     [action.post.id]: action.post
-                }
+                },
+                postControl: {
+                  showModal: false
+                },
+                postDetail: action.post
 
+            }
+
+        case EDIT_COMMENT:
+            return {
+                ...state,
+                postDetailComments: {
+                    ...state.postDetailComments,
+                    [action.comment.id]: action.comment
+                }
             }
 
         default:

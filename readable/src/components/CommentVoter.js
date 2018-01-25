@@ -1,14 +1,12 @@
 /**
  * Created by apaivaer on 21/01/2018.
  */
-/**
- * Created by apaivaer on 20/12/2017.
- */
+
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { voteUpComment, voteDownComment } from '../actions/PostsActions'
 
-class Voter extends Component {
+class CommentVoter extends Component {
 
     render() {
         return(
@@ -28,4 +26,4 @@ function mapDispatchToProps(dispatch) {
     })
 }
 
-export default connect(null,mapDispatchToProps)(Voter)
+export default connect(null,mapDispatchToProps)(CommentVoter)

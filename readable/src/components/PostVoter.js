@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { voteUpPost, voteDownPost } from '../actions/PostsActions'
 
-class Voter extends Component {
+class PostVoter extends Component {
 
     render() {
         return(
@@ -25,4 +25,4 @@ function mapDispatchToProps(dispatch) {
     })
 }
 
-export default connect(null,mapDispatchToProps)(Voter)
+export default connect(null,mapDispatchToProps)(PostVoter)

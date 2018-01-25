@@ -18,9 +18,9 @@ class PostControl extends Component {
     modalStyle = {
         content : {
             top                        : '20%',
-            left                       : '30%',
-            right                      : '30%',
-            bottom                     : '40%',
+            left                       : '20%',
+            right                      : '20%',
+            bottom                     : '20%',
             border                     : '1px solid #ccc',
             background                 : '#fff',
         }
@@ -99,7 +99,7 @@ class PostControl extends Component {
                         </div>
                         <div className="newPostLabelInputWrapper">
                             <label className="newPostModalLabel">Category</label>
-                            <select value={this.props.postControl.postCategory} name="newPostSelectCategory" className="newPostCategorySelect" onChange={this.handleNewPostInputChange}>
+                            <select name="newPostSelectCategory" className="newPostCategorySelect" onChange={this.handleNewPostInputChange} disabled={this.props.postControl.mode === 'editPost'}>
                                 {this.props.categories.map((category)=>{
                                     if(category.name === this.props.postControl.postCategory) {
                                         return <option selected value={category.name}>{category.name}</option>
@@ -110,7 +110,7 @@ class PostControl extends Component {
                         </div>
                         <div className="newPostLabelInputWrapper">
                             <label className="newPostModalLabel">Author</label>
-                            <textarea  style={{'overflow' :'hidden'}} className="newPostTextAreaAuthor" type="text" name="postAuthor" value={this.state.postAuthor} onChange={this.handleNewPostInputChange}/>
+                            <textarea  style={{'overflow' :'hidden'}} className="newPostTextAreaAuthor" type="text" name="postAuthor" value={this.state.postAuthor} onChange={this.handleNewPostInputChange} disabled={this.props.postControl.mode === 'editPost'}/>
                         </div>
                         <div className="newPostLabelInputWrapper">
                             <label className="newPostModalLabel">Body</label>
