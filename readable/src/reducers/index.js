@@ -18,7 +18,8 @@ import {
     EDIT_POST,
     DELETE_COMMENT,
     OPEN_COMMENT_EDITOR,
-    EDIT_COMMENT
+    EDIT_COMMENT,
+    POSTS_SORT_BY_FILTER
 } from "../actions/PostsActions"
 import { RECEIVE_ALL_CATEGORIES } from "../actions/CategoriesActions"
 const initialState = {
@@ -29,7 +30,8 @@ const initialState = {
     },
     commentControl: {
         showModal: false
-    }
+    },
+    postsSortByFilter: null
 }
 
 function reducer(state = initialState,action) {
@@ -223,6 +225,28 @@ function reducer(state = initialState,action) {
                     ...state.postDetailComments,
                     [action.comment.id]: action.comment
                 }
+            }
+
+        case POSTS_SORT_BY_FILTER:
+            let newOrder
+            if(action.filter === state.postsSortByFilter) {
+                switch(state.postsSortByOrder) {
+                    case 'asc':
+                        newOrder = 'desc'
+                        break
+                    case 'desc':
+                        newOrder = 'asc'
+                        break
+                    default:
+                        newOrder = 'desc'
+                        break
+                }
+            }
+            else newOrder = 'desc'
+            return {
+                ...state,
+                postsSortByFilter: action.filter,
+                postsSortByOrder: newOrder
             }
 
         default:

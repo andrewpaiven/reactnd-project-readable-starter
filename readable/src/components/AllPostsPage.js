@@ -6,10 +6,9 @@ import PostList from './PostList'
 import Menu from './Menu'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import { fetchAllPosts, fetchPostsByCategory, newPost, openPostControl} from '../actions/PostsActions'
+import { fetchAllPosts, fetchPostsByCategory, newPost, openPostControl, postsSortByFilter} from '../actions/PostsActions'
 import PostControl from './PostControl'
 class AllPostsPage extends Component {
-
 
     handleOpenNewPostModal = () => {
 
@@ -29,13 +28,24 @@ class AllPostsPage extends Component {
         )
     }
 
+    handleSortBy = (filter) => {
+        this.props.postsSortByFilter(filter)
+    }
+
+    fetchPosts = () => {
+        if(this.props.categoryFilter !== 'All Posts') fetchPostsByCategory(this.props.categoryFilter)
+        else this.props.fetchAllPosts()
+    }
+
     componentWillMount() {
         this.props.openPostControl(false)
+        this.setState({
+            sortByFilter: null
+        })
     }
 
     componentDidMount() {
-        if(this.props.categoryFilter !== 'All Posts') fetchPostsByCategory(this.props.categoryFilter)
-        else this.props.fetchAllPosts()
+        this.fetchPosts()
     }
 
     render() {
@@ -44,6 +54,10 @@ class AllPostsPage extends Component {
                 <Menu/>
                 <span className="headerPostList">{this.props.categoryFilter}</span>
                 <button className="newPost" onClick={()=>this.handleOpenNewPostModal()}>New Post</button>
+                <div className="sortByDiv">Sort by:
+                    <span className="sortBySelector" onClick={()=>this.handleSortBy('voteScore')}>Vote Score</span>
+                    <span className="sortBySelector" onClick={()=>this.handleSortBy('timestamp')}>Timestamp</span>
+                </div>
                 <PostList/>
                 {this.props.postControl.showModal && <PostControl/>}
             </div>
@@ -61,7 +75,8 @@ function mapDispatchToProps(dispatch) {
         fetchAllPosts: () => dispatch(fetchAllPosts()),
         fetchPostsByCategory: (category) => dispatch(fetchPostsByCategory(category)),
         newPost: (id,timestamp,title,body,author,category) => dispatch(newPost(id,timestamp,title,body,author,category)),
-        openPostControl: (showModal,postTitle,postAuthor,postBody,postCategory,postId,mode) => dispatch(openPostControl(showModal,postTitle,postAuthor,postBody,postCategory,postId,mode))
+        openPostControl: (showModal,postTitle,postAuthor,postBody,postCategory,postId,mode) => dispatch(openPostControl(showModal,postTitle,postAuthor,postBody,postCategory,postId,mode)),
+        postsSortByFilter: filter => dispatch(postsSortByFilter(filter))
     })
 }
 

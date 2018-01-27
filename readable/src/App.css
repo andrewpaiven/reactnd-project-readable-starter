@@ -37,8 +37,6 @@
   margin-left: 200px;
   display: inline-block;
   font-size: 60px;
-
-
 }
 
 .newPost{
@@ -335,6 +333,23 @@
 
 .newPostModalDiv {
     font-family: 'Raleway';
+}
+
+/* Sort by filters */
+.sortByDiv{
+  padding-left: 30px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  margin-left: 200px;
+  font-size: 12px;
+  text-align: left;
+}
+
+.sortBySelector {
+  margin-left: 10px;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor:pointer;
 }
 
 

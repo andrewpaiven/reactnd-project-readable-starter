@@ -21,6 +21,7 @@ export const EDIT_POST = 'EDIT_POST'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const OPEN_COMMENT_EDITOR = 'OPEN_COMMENT_EDITOR'
+export const POSTS_SORT_BY_FILTER = 'POSTS_SORT_BY_FILTER'
 
 // Receive all posts
 export const receiveAllPosts = posts =>  ({
@@ -200,6 +201,12 @@ export const editPost = (id,title,body) => dispatch => {
     PostsAPI.editPost(id,title,body)
         .then(post=>(dispatch(editPostAction(post))))
 }
+
+//SortBy
+export const postsSortByFilter = filter => ({
+    type: POSTS_SORT_BY_FILTER,
+    filter
+})
 
 
 

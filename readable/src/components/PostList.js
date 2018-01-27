@@ -13,7 +13,7 @@ class PostList extends Component {
                 {this.props.postList.length === 0 &&  <div className="postDiv">
                     <h2>No posts to display ! :( </h2>
                 </div>}
-                {this.props.postList.map((post)=>(
+                {_.orderBy(this.props.postList,this.props.postsSortByFilter,this.props.postsSortByOrder).map((post)=>(
                     <div className="postDiv">
                         <Post
                             id={post.id}
@@ -34,7 +34,9 @@ class PostList extends Component {
 }
 
 const mapStateToProps = state => ({
-    postList: _.values(state.postList)
+    postList: _.values(state.postList),
+    postsSortByFilter: state.postsSortByFilter,
+    postsSortByOrder: state.postsSortByOrder
 })
 
 export default connect(mapStateToProps,null)(PostList)
