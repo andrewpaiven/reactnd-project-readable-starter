@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 import { deletePost } from '../actions/PostsActions'
 import { openPostControl } from '../actions/PostsActions'
 import { processTime } from "../helpers/TimeFunctions"
+import { withRouter } from 'react-router-dom';
 
 
 class Post extends Component {
@@ -33,7 +34,7 @@ class Post extends Component {
         return(
             <div>
                 <h1 className="postTitle" onClick={()=>this.props.displayPostDetail(this.props.id)}>
-                    <Link to={`/postDetail/${this.props.id}`} className="postTitle" style={{'text-decoration':'none','color':'inherit'}}> {`${this.props.title}`}</Link>
+                    <Link to={`/postdetail/${this.props.id}`} className="postTitle" style={{'text-decoration':'none','color':'inherit'}}> {`${this.props.title}`}</Link>
                 </h1>
                 <h2 className="postAuthor">{`by ${this.props.author}`}</h2>
                 <p>{`Comments: ${this.props.commentCount}`}</p>
@@ -54,4 +55,4 @@ const mapDispatchToProps = () => dispatch => ({
     openPostControl: (showModal,postTitle,postAuthor,postBody,postCategory,postId,mode) => dispatch(openPostControl(showModal,postTitle,postAuthor,postBody,postCategory,postId,mode)),
 })
 
-export default connect(null,mapDispatchToProps)(Post)
+export default withRouter(connect(null,mapDispatchToProps)(Post))

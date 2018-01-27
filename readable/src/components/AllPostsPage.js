@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import { fetchAllPosts, fetchPostsByCategory, newPost, openPostControl, postsSortByFilter} from '../actions/PostsActions'
 import PostControl from './PostControl'
+import { withRouter } from 'react-router-dom';
 class AllPostsPage extends Component {
 
     handleOpenNewPostModal = () => {
@@ -33,8 +34,8 @@ class AllPostsPage extends Component {
     }
 
     fetchPosts = () => {
-        if(this.props.categoryFilter !== 'All Posts') fetchPostsByCategory(this.props.categoryFilter)
-        else this.props.fetchAllPosts()
+        if(this.props.categoryFilter === 'All Posts' || !this.props.categoryFilter) this.props.fetchAllPosts()
+        else this.props.fetchPostsByCategory(this.props.categoryFilter)
     }
 
     componentWillMount() {
@@ -52,7 +53,7 @@ class AllPostsPage extends Component {
         return(
             <div className="container">
                 <Menu/>
-                <span className="headerPostList">{this.props.categoryFilter}</span>
+                <span className="headerPostList">{!this.props.categoryFilter ? 'All Posts' : this.props.categoryFilter}</span>
                 <button className="newPost" onClick={()=>this.handleOpenNewPostModal()}>New Post</button>
                 <div className="sortByDiv">Sort by:
                     <span className="sortBySelector" onClick={()=>this.handleSortBy('voteScore')}>Vote Score</span>
@@ -63,9 +64,9 @@ class AllPostsPage extends Component {
             </div>
     )}
 }
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state,ownProps) => ({
     postList: _.values(state.postList),
-    categoryFilter: state.categoryFilter,
+    categoryFilter: ownProps.match.params.category,
     categories: _.values(state.categories),
     postControl: state.postControl,
 })
@@ -80,4 +81,4 @@ function mapDispatchToProps(dispatch) {
     })
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(AllPostsPage)
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(AllPostsPage))

@@ -4,13 +4,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CommentVoter from './CommentVoter'
-import { fetchPostComments, postComment, openPostControl, deleteComment, editComment, openCommentEditorAction } from '../actions/PostsActions'
+import { fetchPostComments, postComment, openPostControl, deleteComment, editComment, openCommentEditorAction, getPost } from '../actions/PostsActions'
 import _ from 'lodash'
 import uuidv1 from 'uuid'
 import Post from './Post'
 import { processTime } from "../helpers/TimeFunctions"
 import PostControl from './PostControl'
 import CommentControl from './CommentControl'
+import { withRouter } from 'react-router-dom';
 
 class PostDetail extends Component {
 
@@ -56,7 +57,8 @@ class PostDetail extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchPostComments(this.props.postDetail.id)
+        this.props.getPost(this.props.postDetailId)
+        this.props.fetchPostComments(this.props.postDetailId)
     }
 
     render() {
@@ -64,7 +66,7 @@ class PostDetail extends Component {
             <div className="postList">
                 <div className="postDiv">
                     {this.props.postControl.showModal && <PostControl/>}
-                    <Post
+                    {this.props.postDetail && <Post
                         id={this.props.postDetail.id}
                         title={this.props.postDetail.title}
                         author={this.props.postDetail.author}
@@ -74,7 +76,7 @@ class PostDetail extends Component {
                         voteScore={this.props.postDetail.voteScore}
                         deleted={this.props.postDetail.deleted}
                         commentCount={this.props.postDetail.commentCount}
-                    />
+                    />}
                     {this.props.commentControl.showModal && <CommentControl/>}
                     {this.props.postDetailComments.length !== 0 &&
                     <div>
@@ -122,11 +124,12 @@ class PostDetail extends Component {
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state,ownProps) => ({
     postDetail: state.postDetail,
     postDetailComments: _.values(state.postDetailComments),
     postControl: state.postControl,
-    commentControl: state.commentControl
+    commentControl: state.commentControl,
+    postDetailId: ownProps.match.params.id
 })
 
 const mapDispatchToProps = () => dispatch => ({
@@ -135,9 +138,10 @@ const mapDispatchToProps = () => dispatch => ({
     openPostControl: (showModal,postTitle,postAuthor,postBody,postCategory,postId,mode) => dispatch(openPostControl(showModal,postTitle,postAuthor,postBody,postCategory,postId,mode)),
     deleteComment: id => dispatch(deleteComment(id)),
     editComment: (id,timestamp,body) => dispatch(editComment(id,timestamp,body)),
-    openCommentEditorAction: (showModal,author,body,id) => dispatch(openCommentEditorAction(showModal,author,body,id))
+    openCommentEditorAction: (showModal,author,body,id) => dispatch(openCommentEditorAction(showModal,author,body,id)),
+    getPost: id => dispatch(getPost(id))
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(PostDetail)
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(PostDetail))
 
 

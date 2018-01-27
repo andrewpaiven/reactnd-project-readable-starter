@@ -11,10 +11,6 @@ import AllPostsPage from './components/AllPostsPage'
 
 class App extends Component {
 
-    componentDidMount() {
-        this.props.fetchAllPosts()
-    }
-
     render() {
         return (
             <div>
@@ -29,10 +25,10 @@ class App extends Component {
                 )}/>
 
                 {/* Post Detail Page */}
-                <Route exact path="/postDetail/:id" render={()=>(
+                <Route exact path="/postdetail/:id" render={()=>(
                     <div className="container">
                         <Menu/>
-                        {this.props.postDetail && <PostDetail/>}
+                        <PostDetail/>
                     </div>
                 )}/>
 

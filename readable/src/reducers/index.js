@@ -19,7 +19,8 @@ import {
     DELETE_COMMENT,
     OPEN_COMMENT_EDITOR,
     EDIT_COMMENT,
-    POSTS_SORT_BY_FILTER
+    POSTS_SORT_BY_FILTER,
+    GET_POST
 } from "../actions/PostsActions"
 import { RECEIVE_ALL_CATEGORIES } from "../actions/CategoriesActions"
 const initialState = {
@@ -160,6 +161,13 @@ function reducer(state = initialState,action) {
                 postDetail: {
                     ...state.postDetail,
                     commentCount: commentCount
+                },
+                postList: {
+                    ...state.postList,
+                    [state.postDetail.id]: {
+                        ...state.postDetail,
+                        commentCount: commentCount
+                    }
                 }
             }
 
@@ -173,10 +181,16 @@ function reducer(state = initialState,action) {
                 postDetail: {
                     ...state.postDetail,
                     commentCount: commentCount
+                },
+                postList: {
+                    ...state.postList,
+                    [state.postDetail.id]: {
+                        ...state.postDetail,
+                        commentCount: commentCount
+                    }
                 }
             }
         }
-
 
         case OPEN_COMMENT_EDITOR:
             return {
@@ -247,6 +261,12 @@ function reducer(state = initialState,action) {
                 ...state,
                 postsSortByFilter: action.filter,
                 postsSortByOrder: newOrder
+            }
+
+        case GET_POST:
+            return {
+                ...state,
+                postDetail: action.post
             }
 
         default:

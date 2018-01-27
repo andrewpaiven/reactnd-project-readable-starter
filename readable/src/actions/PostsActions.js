@@ -22,6 +22,7 @@ export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const OPEN_COMMENT_EDITOR = 'OPEN_COMMENT_EDITOR'
 export const POSTS_SORT_BY_FILTER = 'POSTS_SORT_BY_FILTER'
+export const GET_POST = 'GET_POST'
 
 // Receive all posts
 export const receiveAllPosts = posts =>  ({
@@ -207,6 +208,17 @@ export const postsSortByFilter = filter => ({
     type: POSTS_SORT_BY_FILTER,
     filter
 })
+
+//Get post
+export const getPostAction = post => ({
+    type: GET_POST,
+    post
+})
+
+export const getPost = id => dispatch => {
+    PostsAPI.getPost(id)
+        .then(post=>dispatch(getPostAction(post)))
+}
 
 
 

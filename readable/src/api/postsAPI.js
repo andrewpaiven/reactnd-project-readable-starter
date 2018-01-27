@@ -19,6 +19,12 @@ export const getByCategory = (category) => (
         .then(res=>res.json())
 )
 
+//Get post
+export const getPost = id => (
+    fetch(`${api}/posts/${id}`,{headers})
+        .then(res=>res.json())
+)
+
 //New post
 export const newPost = (id,timestamp,title,body,author,category) => {
     const postData = {
