@@ -2,15 +2,15 @@
  * Created by apaivaer on 20/12/2017.
  */
 import React, { Component } from 'react'
-import _ from 'lodash'
 import { connect } from 'react-redux'
-import { fetchCategories } from '../actions/CategoriesActions'
-import { fetchPostsByCategory } from '../actions/PostsActions'
-import { fetchAllPosts } from '../actions/PostsActions'
 import { Link } from 'react-router-dom'
+import _ from 'lodash'
+import { fetchCategories } from '../actions/CategoriesActions'
+import { fetchPostsByCategory, fetchAllPosts } from '../actions/PostsActions'
 
 class Menu extends Component {
 
+    //React lifecycle methods
     componentDidMount() {
         this.props.fetchCategories()
     }

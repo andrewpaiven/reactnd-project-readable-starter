@@ -1,6 +1,3 @@
-/**
- * Created by apaivaer on 20/12/2017.
- */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { voteUpPost, voteDownPost } from '../actions/PostsActions'
@@ -18,11 +15,9 @@ class PostVoter extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return({
-        voteUp: (id) => dispatch(voteUpPost(id)),
-        voteDown: (id) => dispatch(voteDownPost(id))
-    })
-}
+const mapDispatchToProps = () => dispatch => ({
+    voteUp: (id) => dispatch(voteUpPost(id)),
+    voteDown: (id) => dispatch(voteDownPost(id))
+})
 
 export default connect(null,mapDispatchToProps)(PostVoter)

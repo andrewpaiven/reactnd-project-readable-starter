@@ -2,8 +2,8 @@
  * Created by apaivaer on 25/01/2018.
  */
 import React, { Component } from 'react'
-import Modal from 'react-modal'
 import { connect } from 'react-redux'
+import Modal from 'react-modal'
 import { editComment, openCommentEditorAction } from '../actions/PostsActions'
 
 class CommentControl extends Component {
@@ -25,6 +25,7 @@ class CommentControl extends Component {
         }
     }
 
+    //React lifecycle methods
     componentDidMount() {
         this.setState({
             id: this.props.commentControl.id,
@@ -34,6 +35,7 @@ class CommentControl extends Component {
         Modal.setAppElement('body');
     }
 
+    // Event handling
     handleClose = () => {
         this.props.openCommentEditorAction(false,null,null)
     }
@@ -88,7 +90,7 @@ const mapStateToProps = state => ({
     commentControl: state.commentControl
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = () => dispatch => ({
     editComment: (id,timestamp,body) => dispatch(editComment(id,timestamp,body)),
     openCommentEditorAction: (showModal,author,body) => dispatch(openCommentEditorAction(showModal,author,body))
 })

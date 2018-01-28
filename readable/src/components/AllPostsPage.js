@@ -2,17 +2,43 @@
  * Created by apaivaer on 22/01/2018.
  */
 import React, { Component } from 'react'
-import PostList from './PostList'
-import Menu from './Menu'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom';
 import _ from 'lodash'
 import { fetchAllPosts, fetchPostsByCategory, newPost, openPostControl, postsSortByFilter} from '../actions/PostsActions'
 import PostControl from './PostControl'
-import { withRouter } from 'react-router-dom';
+import PostList from './PostList'
+import Menu from './Menu'
+
 class AllPostsPage extends Component {
 
+    //React lifecycle methods
+    componentWillMount() {
+        this.props.openPostControl(false)
+        this.setState({
+            sortByFilter: null
+        })
+    }
+
+    componentDidMount() {
+        this.fetchPosts(this.props.categoryFilter)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(this.props.categoryFilter !== nextProps.categoryFilter) this.fetchPosts(nextProps.categoryFilter)
+    }
+
+    //Fetches posts by category
+    fetchPosts = (category) => {
+        if(category === 'All Posts' || !category) this.props.fetchAllPosts()
+        else this.props.fetchPostsByCategory(category)
+    }
+
+    // Handles the opening of the modal for a new post, with pre filled data
     handleOpenNewPostModal = () => {
 
+        //Prefills the category of the new post form with either the current category selected
+        //or the first category in the list
         let categoryForNewPost;
         this.props.categoryFilter === 'All Posts' ?
             categoryForNewPost = this.props.categories[0].name :
@@ -33,27 +59,6 @@ class AllPostsPage extends Component {
         this.props.postsSortByFilter(filter)
     }
 
-    fetchPosts = (filter) => {
-        if(filter === 'All Posts' || !filter) this.props.fetchAllPosts()
-        else this.props.fetchPostsByCategory(filter)
-    }
-
-    componentWillMount() {
-        this.props.openPostControl(false)
-        this.setState({
-            sortByFilter: null
-        })
-    }
-
-    componentDidMount() {
-        this.fetchPosts(this.props.categoryFilter)
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if(this.props.categoryFilter !== nextProps.categoryFilter) this.fetchPosts(nextProps.categoryFilter)
-    }
-
-
     render() {
         return(
             <div className="container">
@@ -70,20 +75,16 @@ class AllPostsPage extends Component {
     )}
 }
 const mapStateToProps = (state,ownProps) => ({
-    postList: _.values(state.postList),
     categoryFilter: ownProps.match.params.category,
     categories: _.values(state.categories),
     postControl: state.postControl,
 })
 
-function mapDispatchToProps(dispatch) {
-    return({
-        fetchAllPosts: () => dispatch(fetchAllPosts()),
-        fetchPostsByCategory: (category) => dispatch(fetchPostsByCategory(category)),
-        newPost: (id,timestamp,title,body,author,category) => dispatch(newPost(id,timestamp,title,body,author,category)),
-        openPostControl: (showModal,postTitle,postAuthor,postBody,postCategory,postId,mode) => dispatch(openPostControl(showModal,postTitle,postAuthor,postBody,postCategory,postId,mode)),
-        postsSortByFilter: filter => dispatch(postsSortByFilter(filter))
-    })
-}
+const mapDispatchToProps = () => dispatch => ({
+    fetchAllPosts: () => dispatch(fetchAllPosts()),
+    fetchPostsByCategory: (category) => dispatch(fetchPostsByCategory(category)),
+    openPostControl: (showModal,postTitle,postAuthor,postBody,postCategory,postId,mode) => dispatch(openPostControl(showModal,postTitle,postAuthor,postBody,postCategory,postId,mode)),
+    postsSortByFilter: filter => dispatch(postsSortByFilter(filter))
+})
 
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(AllPostsPage))

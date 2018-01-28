@@ -2,9 +2,9 @@
  * Created by apaivaer on 20/12/2017.
  */
 import React, { Component } from 'react'
-import Post from './Post'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import Post from './Post'
 
 class PostList extends Component {
     render() {
@@ -15,17 +15,7 @@ class PostList extends Component {
                 </div>}
                 {_.orderBy(this.props.postList,this.props.postsSortByFilter,this.props.postsSortByOrder).map((post)=>(
                     <div className="postDiv">
-                        <Post
-                            id={post.id}
-                            title={post.title}
-                            author={post.author}
-                            body={post.body}
-                            category={post.category}
-                            timestamp={post.timestamp}
-                            voteScore={post.voteScore}
-                            deleted={post.deleted}
-                            commentCount={post.commentCount}
-                            />
+                        <Post post={post}/>
                     </div>
                 ))}
             </div>

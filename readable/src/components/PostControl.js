@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import Modal from 'react-modal'
 import { connect } from 'react-redux'
-import { newPost, editPost } from '../actions/PostsActions'
 import _ from 'lodash'
 import uuidv1 from 'uuid'
-import { openPostControl } from '../actions/PostsActions'
+import Modal from 'react-modal'
+import { newPost, editPost, openPostControl } from '../actions/PostsActions'
 
 class PostControl extends Component {
 
@@ -26,6 +25,20 @@ class PostControl extends Component {
         }
     }
 
+    //React lifecycle methods
+    componentDidMount() {
+        this.setState({
+            postId: this.props.postControl.postId,
+            postTitle: this.props.postControl.postTitle,
+            postBody: this.props.postControl.postBody,
+            postAuthor: this.props.postControl.postAuthor,
+            postCategory: this.props.postControl.postCategory,
+        })
+
+        Modal.setAppElement('body');
+    }
+
+    //Event Handling
 
     handleCloseNewPostModal = () => {
         this.props.openPostControl(false)
@@ -58,18 +71,6 @@ class PostControl extends Component {
                 return
         }
         return
-    }
-
-    componentDidMount() {
-        this.setState({
-            postId: this.props.postControl.postId,
-            postTitle: this.props.postControl.postTitle,
-            postBody: this.props.postControl.postBody,
-            postAuthor: this.props.postControl.postAuthor,
-            postCategory: this.props.postControl.postCategory,
-        })
-
-        Modal.setAppElement('body');
     }
 
     handlePostSubmit = (event) => {
@@ -133,13 +134,10 @@ const mapStateToProps = (state) => ({
     postControl: state.postControl,
 })
 
-function mapDispatchToProps(dispatch) {
-    return({
-        newPost: (id,timestamp,title,body,author,category) => dispatch(newPost(id,timestamp,title,body,author,category)),
-        openPostControl: status => dispatch(openPostControl(status)),
-        editPost: (id,title,body) => dispatch(editPost(id,title,body))
-
-    })
-}
+const mapDispatchToProps = () => dispatch => ({
+    newPost: (id,timestamp,title,body,author,category) => dispatch(newPost(id,timestamp,title,body,author,category)),
+    openPostControl: status => dispatch(openPostControl(status)),
+    editPost: (id,title,body) => dispatch(editPost(id,title,body))
+})
 
 export default connect(mapStateToProps,mapDispatchToProps)(PostControl)

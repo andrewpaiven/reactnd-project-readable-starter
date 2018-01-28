@@ -2,30 +2,26 @@
  * Created by apaivaer on 19/12/2017.
  */
 import React, { Component } from 'react';
-import PostVoter from './PostVoter.js'
 import { connect } from 'react-redux'
-import { displayPostDetails } from '../actions/PostsActions'
-import { Link } from 'react-router-dom'
-import { deletePost } from '../actions/PostsActions'
-import { openPostControl } from '../actions/PostsActions'
+import { Link, withRouter } from 'react-router-dom'
+import PostVoter from './PostVoter.js'
+import { displayPostDetails, deletePost, openPostControl} from '../actions/PostsActions'
 import { processTime } from "../helpers/TimeFunctions"
-import { withRouter } from 'react-router-dom';
-
 
 class Post extends Component {
 
     handlePostDeletion = () => {
-        this.props.deletePost(this.props.id)
+        this.props.deletePost(this.props.post.id)
     }
 
     handlePostEdit = () => {
         this.props.openPostControl(
             true, //Display Modal
-            this.props.title, //Post Title
-            this.props.author, //Post Author
-            this.props.body, //Post Body
-            this.props.category, //Post Category
-            this.props.id, //Post id
+            this.props.post.title, //Post Title
+            this.props.post.author, //Post Author
+            this.props.post.body, //Post Body
+            this.props.post.category, //Post Category
+            this.props.post.id, //Post id
             "editPost" //Form mode (newPost/editPost)
         )
     }
@@ -33,14 +29,14 @@ class Post extends Component {
     render() {
         return(
             <div>
-                <h1 className="postTitle" onClick={()=>this.props.displayPostDetail(this.props.id)}>
-                    <Link to={`/postdetail/${this.props.id}`} className="postTitle" style={{'text-decoration':'none','color':'inherit'}}> {`${this.props.title}`}</Link>
+                <h1 className="postTitle" onClick={()=>this.props.displayPostDetail(this.props.post.id)}>
+                    <Link to={`/postdetail/${this.props.post.id}`} className="postTitle" style={{'text-decoration':'none','color':'inherit'}}> {`${this.props.post.title}`}</Link>
                 </h1>
-                <h2 className="postAuthor">{`by ${this.props.author}`}</h2>
-                <p>{`Comments: ${this.props.commentCount}`}</p>
-                <PostVoter postId={this.props.id} voteScore={this.props.voteScore}/>
-                <p className="postContent">{`${this.props.body}`}</p>
-                <span className="postTimeStampAndCategory">{`Posted in ${this.props.category} on ${processTime(this.props.timestamp)}`}</span>
+                <h2 className="postAuthor">{`by ${this.props.post.author}`}</h2>
+                <p>{`Comments: ${this.props.post.commentCount}`}</p>
+                <PostVoter postId={this.props.post.id} voteScore={this.props.post.voteScore}/>
+                <p className="postContent">{`${this.props.post.body}`}</p>
+                <span className="postTimeStampAndCategory">{`Posted in ${this.props.post.category} on ${processTime(this.props.post.timestamp)}`}</span>
                 <button onClick={this.handlePostEdit} className="postEdit">Edit Post</button>
                 <button onClick={this.handlePostDeletion} className="postDelete">Delete Post</button>
             </div>

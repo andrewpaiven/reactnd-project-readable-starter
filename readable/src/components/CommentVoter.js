@@ -1,7 +1,3 @@
-/**
- * Created by apaivaer on 21/01/2018.
- */
-
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { voteUpComment, voteDownComment } from '../actions/PostsActions'
@@ -19,11 +15,9 @@ class CommentVoter extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return({
-        voteUpComment: (id) => dispatch(voteUpComment(id)),
-        voteDownComment: (id) => dispatch(voteDownComment(id))
-    })
-}
+const mapDispatchToProps = () => dispatch => ({
+    voteUpComment: (id) => dispatch(voteUpComment(id)),
+    voteDownComment: (id) => dispatch(voteDownComment(id))
+})
 
 export default connect(null,mapDispatchToProps)(CommentVoter)
