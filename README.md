@@ -1,20 +1,20 @@
-# Readable API Server
+# Readable 
 
-This is the starter project for the final assessment project for Udacity's Redux course where you will build a content and comment web app. Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.
+This application is the final react/redux project of udacity's react nanodegree.
 
-This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.
+Readable is a forum-like application where users can add, comment and vote on posts. It's entirely built with react using redux for state management. No CSS templates were harmed during the development process of this application.
 
-## Start Developing
+## Launching the application
 
-To get started developing right away:
+To get started with the application you will need to start the API server and the user interface
 
 * Install and start the API server
     - `cd api-server`
     - `npm install`
     - `node server`
-* In another terminal window, use Create React App to scaffold out the front-end
-    - `create-react-app frontend`
-    - `cd frontend`
+* For the user interface
+	- `cd ui-client`
+    - `npm install`
     - `npm start`
 
 ## API Server
