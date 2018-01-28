@@ -7,6 +7,7 @@ import { fetchAllPosts } from './actions/PostsActions'
 import _ from 'lodash'
 import { Route } from 'react-router-dom'
 import AllPostsPage from './components/AllPostsPage'
+import { withRouter } from 'react-router-dom';
 
 
 class App extends Component {
@@ -51,4 +52,4 @@ function mapDispatchToProps(dispatch) {
     })
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(App))

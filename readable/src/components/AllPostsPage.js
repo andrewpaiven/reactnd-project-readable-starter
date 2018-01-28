@@ -33,9 +33,9 @@ class AllPostsPage extends Component {
         this.props.postsSortByFilter(filter)
     }
 
-    fetchPosts = () => {
-        if(this.props.categoryFilter === 'All Posts' || !this.props.categoryFilter) this.props.fetchAllPosts()
-        else this.props.fetchPostsByCategory(this.props.categoryFilter)
+    fetchPosts = (filter) => {
+        if(filter === 'All Posts' || !filter) this.props.fetchAllPosts()
+        else this.props.fetchPostsByCategory(filter)
     }
 
     componentWillMount() {
@@ -46,8 +46,13 @@ class AllPostsPage extends Component {
     }
 
     componentDidMount() {
-        this.fetchPosts()
+        this.fetchPosts(this.props.categoryFilter)
     }
+
+    componentWillReceiveProps(nextProps) {
+        if(this.props.categoryFilter !== nextProps.categoryFilter) this.fetchPosts(nextProps.categoryFilter)
+    }
+
 
     render() {
         return(
