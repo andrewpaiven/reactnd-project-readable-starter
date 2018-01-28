@@ -83,16 +83,16 @@ class PostDetail extends Component {
                         </div>
 
                         {this.state.commentAddFieldsOn &&
-                        <div style={{'margin-top':'20px'}}>
+                        <div style={{'marginTop':'20px'}}>
                             <h5 className='commentPostTitle'>New Comment</h5>
                             <form onSubmit={this.handleCommentSubmit}>
-                                <p style={{'verticalAlign':'center'}}>
+                                <p className="verticalAlignMiddle">
                                     <label className="commentModalLabel">Comment</label>
-                                    <textarea  style={{'overflow' :'hidden'}} className="bodyPostModal" type="text" name="commentBody" onChange={this.handleNewCommentInputChange}/>
+                                    <textarea  className="bodyPostModal" type="text" name="commentBody" onChange={this.handleNewCommentInputChange}/>
                                 </p>
                                 <label className="commentModalLabel">Author</label>
                                 <input className="authorPostModal" type="text" name="commentAuthor" onChange={this.handleNewCommentInputChange}/>
-                                <div style={{'text-align':'center'}}>
+                                <div className="textAlignCenter">
                                     <input className="commentSubmitButton" type="submit" value="Submit"/>
                                     <button className="commentCancelButton" onClick={this.handleCloseModal}>Cancel</button>
                                 </div>
@@ -101,7 +101,7 @@ class PostDetail extends Component {
                         }
                         {this.props.postDetailComments.length !== 0 &&
                         this.props.postDetailComments.map((comment)=>(
-                            <div className="commentDiv">
+                            <div key={comment.id} className="commentDiv">
                                 <p>Comment by {comment.author} on {processTime(comment.timestamp)}</p>
                                 <p>{comment.body}</p>
                                 <CommentVoter commentId={comment.id} voteScore={comment.voteScore}/>

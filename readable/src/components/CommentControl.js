@@ -65,15 +65,15 @@ class CommentControl extends Component {
                     <form onSubmit={this.handleCommentEditSubmit}>
                         <div className="newPostModalDiv">
                             <h5 className='commentPostTitle'>New Post</h5>
-                            <div className="newPostLabelInputWrapper">
+                            <div className="newCommentLabelInputWrapper">
                                 <label className="newPostModalLabel">Author</label>
-                                <textarea style={{'overflow':'hidden'}} className="newPostTextAreaTitle" type="text" name="commentAuthor" value={this.props.commentControl.author} onChange={this.handleCommentInputChange} disabled/>
+                                <textarea className="newCommentTextAreaTitle" type="text" name="commentAuthor" value={this.props.commentControl.author} onChange={this.handleCommentInputChange} disabled/>
                             </div>
-                            <div className="newPostLabelInputWrapper">
+                            <div className="newCommentLabelInputWrapper">
                                 <label className="newPostModalLabel">Comment</label>
-                                <textarea style={{'overflow':'hidden'}} className="newPostTextAreaTitle" type="text" name="commentBody" value={this.state.body} onChange={this.handleCommentInputChange}/>
+                                <textarea className="newCommentTextAreaTitle" type="text" name="commentBody" value={this.state.body} onChange={this.handleCommentInputChange}/>
                             </div>
-                            <div style={{'text-align':'center'}}>
+                            <div style={{'textAlign':'center'}}>
                                 <input className="commentSubmitButton" type="submit" value="Submit"/>
                                 <button className="commentCancelButton" onClick={this.handleClose}>Close</button>
                             </div>

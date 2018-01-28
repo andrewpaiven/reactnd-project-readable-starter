@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import _ from 'lodash'
-import { fetchAllPosts, fetchPostsByCategory, newPost, openPostControl, postsSortByFilter} from '../actions/PostsActions'
+import { fetchAllPosts, fetchPostsByCategory, openPostControl, postsSortByFilter} from '../actions/PostsActions'
 import PostControl from './PostControl'
 import PostList from './PostList'
 import Menu from './Menu'
@@ -46,9 +46,9 @@ class AllPostsPage extends Component {
 
         this.props.openPostControl(
             true, //Display Modal
-            null, //Post Title
-            null, //Post Author
-            null, //Post Body
+            '', //Post Title
+            '', //Post Author
+            '', //Post Body
             categoryForNewPost, //Post Category
             null, //Post id
             'newPost' //Form mode (newPost/editPost)

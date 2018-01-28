@@ -75,7 +75,6 @@ export const upVote = (id) => {
         option: 'upVote'
     }
 
-    //Must return the promise otherwise will throw an undefined error
     return fetch(`${api}/posts/${id}`, {
         method: 'POST',
         headers: headers,
@@ -89,7 +88,6 @@ export const downVote = (id) => {
         option: "downVote"
     }
 
-    //Must return the promise otherwise will throw an undefined error
     return fetch(`${api}/posts/${id}`, {
         method: 'POST',
         headers: headers,

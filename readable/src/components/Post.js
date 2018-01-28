@@ -29,8 +29,8 @@ class Post extends Component {
     render() {
         return(
             <div>
-                <h1 className="postTitle" onClick={()=>this.props.displayPostDetail(this.props.post.id)}>
-                    <Link to={`/postdetail/${this.props.post.id}`} className="postTitle" style={{'text-decoration':'none','color':'inherit'}}> {`${this.props.post.title}`}</Link>
+                <h1 className="postTitle">
+                    <Link to={`/postdetail/${this.props.post.id}`} className="postTitle" style={{'textDecoration':'none','color':'inherit'}}> {`${this.props.post.title}`}</Link>
                 </h1>
                 <h2 className="postAuthor">{`by ${this.props.post.author}`}</h2>
                 <p>{`Comments: ${this.props.post.commentCount}`}</p>

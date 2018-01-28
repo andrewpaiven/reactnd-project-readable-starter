@@ -14,7 +14,7 @@ class PostList extends Component {
                     <h2>No posts to display ! :( </h2>
                 </div>}
                 {_.orderBy(this.props.postList,this.props.postsSortByFilter,this.props.postsSortByOrder).map((post)=>(
-                    <div className="postDiv">
+                    <div key={post.id} className="postDiv">
                         <Post post={post}/>
                     </div>
                 ))}

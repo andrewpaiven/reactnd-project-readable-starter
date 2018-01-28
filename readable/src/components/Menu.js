@@ -19,11 +19,11 @@ class Menu extends Component {
         return (
         <div className="menuContainer">
             <ul className="menu">
-                <li className="menuItem" style={{'font-family': 'Pacifico', 'font-size':'40px'}} onClick={()=>this.props.fetchAllPosts()}>
-                    <Link style={{'font-family': 'Pacifico', 'font-size':'40px',textDecoration: 'none', color:'inherit'}} to="/">Readable</Link>
+                <li className="menuItem" style={{'fontFamily': 'Pacifico', 'fontSize':'40px'}} onClick={()=>this.props.fetchAllPosts()}>
+                    <Link style={{'fontFamily': 'Pacifico', 'fontSize':'40px',textDecoration: 'none', color:'inherit'}} to="/">Readable</Link>
                 </li>
                 {this.props.categories.map((category)=>(
-                    <li className="menuItem" onClick={()=>this.props.fetchPostsByCategory(category.name)}>
+                    <li key={category.name} className="menuItem" onClick={()=>this.props.fetchPostsByCategory(category.name)}>
                         <Link className="menuItem" style={{textDecoration: 'none', color:'inherit'}} to={`/category/${category.name}`}>{category.name}</Link>
                     </li>
                 ))}

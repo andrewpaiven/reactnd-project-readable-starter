@@ -239,6 +239,7 @@
   height: 100px;
   display: inline-block;
   vertical-align: middle;
+  overflow: hidden;
 }
 
 .authorPostModal {
@@ -314,6 +315,7 @@
 .newPostTextAreaTitle {
     width: 650px;
     height: 30px;
+    overflow: hidden;
 }
 
 .newPostCategorySelect {
@@ -324,11 +326,13 @@
 .newPostTextAreaAuthor {
     width: 300px;
     height: 30px;
+    overflow: hidden;
 }
 
 .newPostTextAreaBody {
     width: 650px;
     height: 100px;
+    overflow: hidden;
 }
 
 .newPostModalDiv {
@@ -350,6 +354,27 @@
   font-weight: bold;
   text-decoration: underline;
   cursor:pointer;
+}
+
+.newCommentLabelInputWrapper {
+  display:flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.newCommentTextAreaTitle {
+  width: 650px;
+  height: 30px;
+  overflow: hidden;
+}
+
+.verticalAlignMiddle {
+  vertical-align: middle;
+}
+
+.textAlignCenter {
+  text-align: center;
 }
 
 

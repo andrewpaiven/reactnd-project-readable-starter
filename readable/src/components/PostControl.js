@@ -34,7 +34,9 @@ class PostControl extends Component {
             postAuthor: this.props.postControl.postAuthor,
             postCategory: this.props.postControl.postCategory,
         })
+    }
 
+    componentWillMount() {
         Modal.setAppElement('body');
     }
 
@@ -96,28 +98,25 @@ class PostControl extends Component {
                         }
                         <div className="newPostLabelInputWrapper">
                             <label className="newPostModalLabel">Post Title</label>
-                            <textarea style={{'overflow':'hidden'}} className="newPostTextAreaTitle" type="text" name="postTitle" value={this.state.postTitle} onChange={this.handleNewPostInputChange}/>
+                            <textarea className="newPostTextAreaTitle" type="text" name="postTitle" value={this.state.postTitle} onChange={this.handleNewPostInputChange}/>
                         </div>
                         <div className="newPostLabelInputWrapper">
                             <label className="newPostModalLabel">Category</label>
-                            <select name="newPostSelectCategory" className="newPostCategorySelect" onChange={this.handleNewPostInputChange} disabled={this.props.postControl.mode === 'editPost'}>
-                                {this.props.categories.map((category)=>{
-                                    if(category.name === this.props.postControl.postCategory) {
-                                        return <option selected value={category.name}>{category.name}</option>
-                                    }
-                                    else return <option value={category.name}>{category.name}</option>
-                                })}
+                            <select name="newPostSelectCategory" defaultValue={this.props.postControl.postCategory} className="newPostCategorySelect" onChange={this.handleNewPostInputChange} disabled={this.props.postControl.mode === 'editPost'}>
+                                {this.props.categories.map((category)=>(
+                                    <option key={category.name} value={category.name}>{category.name}</option>
+                                    ))}
                             </select>
                         </div>
                         <div className="newPostLabelInputWrapper">
                             <label className="newPostModalLabel">Author</label>
-                            <textarea  style={{'overflow' :'hidden'}} className="newPostTextAreaAuthor" type="text" name="postAuthor" value={this.state.postAuthor} onChange={this.handleNewPostInputChange} disabled={this.props.postControl.mode === 'editPost'}/>
+                            <textarea  className="newPostTextAreaAuthor" type="text" name="postAuthor" value={this.state.postAuthor} onChange={this.handleNewPostInputChange} disabled={this.props.postControl.mode === 'editPost'}/>
                         </div>
                         <div className="newPostLabelInputWrapper">
                             <label className="newPostModalLabel">Body</label>
-                            <textarea  style={{'overflow' :'hidden'}} className="newPostTextAreaBody" type="text" name="postBody" value={this.state.postBody} onChange={this.handleNewPostInputChange}/>
+                            <textarea className="newPostTextAreaBody" type="text" name="postBody" value={this.state.postBody} onChange={this.handleNewPostInputChange}/>
                         </div>
-                        <div style={{'text-align':'center'}}>
+                        <div style={{'textAlign':'center'}}>
                             <input className="commentSubmitButton" type="submit" value="Submit"/>
                             <button className="commentCancelButton" onClick={()=>this.handleCloseNewPostModal()}>Cancel</button>
                         </div>
