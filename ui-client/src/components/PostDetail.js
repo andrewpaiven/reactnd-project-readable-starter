@@ -11,7 +11,8 @@ import Post from './Post'
 import PostControl from './PostControl'
 import CommentControl from './CommentControl'
 import Menu from './Menu'
-import { fetchPostComments, postComment, openPostControl, deleteComment, editComment, openCommentEditorAction, getPost } from '../actions/PostsActions'
+import { openPostControl, getPost } from '../actions/PostsActions'
+import { fetchPostComments, postComment, deleteComment, editComment, openCommentEditorAction } from '../actions/CommentsActions'
 import { processTime } from "../helpers/TimeFunctions"
 
 class PostDetail extends Component {

@@ -4,7 +4,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
-import { editComment, openCommentEditorAction } from '../actions/PostsActions'
+import { editComment, openCommentEditorAction } from '../actions/CommentsActions'
 
 class CommentControl extends Component {
 

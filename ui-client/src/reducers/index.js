@@ -2,27 +2,9 @@
  * Created by apaivaer on 20/12/2017.
  */
 import _ from 'lodash'
-import {
-    RECEIVE_ALL_POSTS,
-    RECEIVE_POSTS_BY_CATEGORY,
-    DISPLAY_POST_DETAILS,
-    VOTE_POST_UP,
-    VOTE_POST_DOWN,
-    RECEIVE_POST_COMMENTS,
-    VOTE_COMMENT_UP,
-    VOTE_COMMENT_DOWN,
-    POST_COMMENT,
-    GET_NEW_POST,
-    DELETE_POST,
-    POST_CONTROL,
-    EDIT_POST,
-    DELETE_COMMENT,
-    OPEN_COMMENT_EDITOR,
-    EDIT_COMMENT,
-    POSTS_SORT_BY_FILTER,
-    GET_POST
-} from "../actions/PostsActions"
-import { RECEIVE_ALL_CATEGORIES } from "../actions/CategoriesActions"
+import * as POSTS_ACTIONS from "../actions/PostsActions"
+import * as COMMENTS_ACTIONS from "../actions/CommentsActions"
+import * as CATEGORIES_ACTIONS from "../actions/CategoriesActions"
 const initialState = {
     postList: [],
     categories: [],
@@ -41,27 +23,27 @@ function reducer(state = initialState,action) {
 
         //Handling of post actions
 
-        case RECEIVE_ALL_POSTS:
+        case POSTS_ACTIONS.RECEIVE_ALL_POSTS:
             return {
                 ...state,
                 postList: _.mapKeys(action.posts,'id'),
                 categoryFilter: action.category
         }
 
-        case RECEIVE_POSTS_BY_CATEGORY:
+        case POSTS_ACTIONS.RECEIVE_POSTS_BY_CATEGORY:
             return {
                 ...state,
                 postList: _.mapKeys(action.posts,'id'),
                 categoryFilter: action.category
             }
 
-        case DISPLAY_POST_DETAILS:
+        case POSTS_ACTIONS.DISPLAY_POST_DETAILS:
             return {
                 ...state,
                 postDetail: state.postList[action.id]
             }
 
-        case GET_NEW_POST:
+        case POSTS_ACTIONS.GET_NEW_POST:
             return {
                 ...state,
                 postList: {
@@ -73,7 +55,7 @@ function reducer(state = initialState,action) {
                 }
             }
 
-        case VOTE_POST_UP:
+        case POSTS_ACTIONS.VOTE_POST_UP:
             if(state.postDetail && state.postDetail.id === action.post.id) {
                 return {
                     ...state,
@@ -92,7 +74,7 @@ function reducer(state = initialState,action) {
                 }
             }
 
-        case VOTE_POST_DOWN:
+        case POSTS_ACTIONS.VOTE_POST_DOWN:
             if(state.postDetail && state.postDetail.id === action.post.id) {
                 return {
                     ...state,
@@ -111,7 +93,7 @@ function reducer(state = initialState,action) {
                 }
             }
 
-        case DELETE_POST:
+        case POSTS_ACTIONS.DELETE_POST:
             let postList = {
                 ...state.postList
             }
@@ -123,7 +105,7 @@ function reducer(state = initialState,action) {
                 postDetail: null
             }
 
-        case GET_POST:
+        case POSTS_ACTIONS.GET_POST:
             let postDetail;
             if(!action.post.error && action.post.deleted === false) postDetail = action.post
             else postDetail = null
@@ -132,7 +114,7 @@ function reducer(state = initialState,action) {
                 postDetail: postDetail
             }
 
-        case POST_CONTROL:
+        case POSTS_ACTIONS.POST_CONTROL:
             return {
                 ...state,
                 postControl: {
@@ -147,7 +129,7 @@ function reducer(state = initialState,action) {
                 }
             }
 
-        case EDIT_POST:
+        case POSTS_ACTIONS.EDIT_POST:
             return {
                 ...state,
                 postList: {
@@ -161,7 +143,7 @@ function reducer(state = initialState,action) {
 
             }
 
-        case POSTS_SORT_BY_FILTER:
+        case POSTS_ACTIONS.POSTS_SORT_BY_FILTER:
             let newOrder
             if(action.filter === state.postsSortByFilter) {
                 switch(state.postsSortByOrder) {
@@ -183,15 +165,16 @@ function reducer(state = initialState,action) {
                 postsSortByOrder: newOrder
             }
 
-       // Handling of Comment Actions
 
-        case RECEIVE_POST_COMMENTS:
+// Handling of Comment Actions
+
+        case COMMENTS_ACTIONS.RECEIVE_POST_COMMENTS:
             return {
                 ...state,
                 postDetailComments: _.mapKeys(action.comments,'id')
             }
 
-        case VOTE_COMMENT_UP:
+        case COMMENTS_ACTIONS.VOTE_COMMENT_UP:
             return {
                 ...state,
                 postDetailComments: {
@@ -200,7 +183,7 @@ function reducer(state = initialState,action) {
                 }
             }
 
-        case VOTE_COMMENT_DOWN:
+        case COMMENTS_ACTIONS.VOTE_COMMENT_DOWN:
             return {
                 ...state,
                 postDetailComments: {
@@ -209,7 +192,7 @@ function reducer(state = initialState,action) {
                 }
             }
 
-        case POST_COMMENT:
+        case COMMENTS_ACTIONS.POST_COMMENT:
             let commentCount = state.postDetail.commentCount + 1
             return {
                 ...state,
@@ -230,7 +213,7 @@ function reducer(state = initialState,action) {
                 }
             }
 
-        case DELETE_COMMENT: {
+        case COMMENTS_ACTIONS.DELETE_COMMENT: {
             let commentCount = state.postDetail.commentCount - 1
             let postDetailComments = state.postDetailComments
             delete postDetailComments[action.comment.id]
@@ -251,7 +234,7 @@ function reducer(state = initialState,action) {
             }
         }
 
-        case OPEN_COMMENT_EDITOR:
+        case COMMENTS_ACTIONS.OPEN_COMMENT_EDITOR:
             return {
                 ...state,
                 commentControl: {
@@ -262,7 +245,7 @@ function reducer(state = initialState,action) {
                 }
             }
 
-        case EDIT_COMMENT:
+        case COMMENTS_ACTIONS.EDIT_COMMENT:
             return {
                 ...state,
                 postDetailComments: {
@@ -273,12 +256,11 @@ function reducer(state = initialState,action) {
 
         //Handle category actions
 
-        case RECEIVE_ALL_CATEGORIES:
+        case CATEGORIES_ACTIONS.RECEIVE_ALL_CATEGORIES:
             return {
                 ...state,
                 categories: _.mapKeys(action.categories,'name')
             }
-
 
         default:
             return state
