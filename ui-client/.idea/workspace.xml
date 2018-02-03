@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="21339ff3-77b6-42df-b514-2d05e3a4f862" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.js" afterPath="$PROJECT_DIR$/src/App.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Menu.js" afterPath="$PROJECT_DIR$/src/components/Menu.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Post.js" afterPath="$PROJECT_DIR$/src/components/Post.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/PostControl.js" afterPath="$PROJECT_DIR$/src/components/PostControl.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/PostDetail.js" afterPath="$PROJECT_DIR$/src/components/PostDetail.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/index.js" afterPath="$PROJECT_DIR$/src/reducers/index.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,14 +16,25 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="PostDetail.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PostDetail.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/PostDetail.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="137" column="0" lean-forward="false" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
+            <state relative-caret-position="315">
+              <caret line="124" column="26" lean-forward="false" selection-start-line="124" selection-start-column="26" selection-end-line="124" selection-end-column="26" />
               <folding>
                 <element signature="e#46#87#0" expanded="true" />
-                <marker date="1517654733729" expanded="true" signature="6128:6132" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="278" column="1" lean-forward="true" selection-start-line="278" selection-start-column="1" selection-end-line="278" selection-end-column="1" />
+              <folding>
+                <element signature="e#46#68#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -51,7 +60,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PostControl.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PostControl.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/PostControl.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="366">
@@ -105,18 +114,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PostList.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/PostList.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="12" column="32" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="32" />
-              <folding>
-                <element signature="e#46#86#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -148,8 +145,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>calling</find>
-      <find>alert</find>
       <find>COMMENT</find>
       <find>categories</find>
       <find>postList</find>
@@ -159,7 +154,6 @@
       <find>deletePost</find>
       <find>postsSortByFilter</find>
       <find>UUID</find>
-      <find>postDetailId</find>
       <find>openPostControl</find>
       <find>map</find>
       <find>MAP</find>
@@ -178,6 +172,9 @@
       <find>displayPostDetails</find>
       <find>link</find>
       <find>postCate</find>
+      <find>postDetailId</find>
+      <find>postDetail</find>
+      <find>GET</find>
     </findStrings>
     <replaceStrings>
       <replace>this.props.postDetail</replace>
@@ -202,7 +199,6 @@
         <option value="$PROJECT_DIR$/src/components/NewPost.js" />
         <option value="$PROJECT_DIR$/src/helpers/TimeFunctions.js" />
         <option value="$PROJECT_DIR$/src/api/commentsAPI.js" />
-        <option value="$PROJECT_DIR$/src/reducers/index.js" />
         <option value="$PROJECT_DIR$/src/actions/PostsActions.js" />
         <option value="$PROJECT_DIR$/src/components/CommentVoter.js" />
         <option value="$PROJECT_DIR$/src/components/PostVoter.js" />
@@ -215,13 +211,14 @@
         <option value="$PROJECT_DIR$/src/components/PostList.js" />
         <option value="$PROJECT_DIR$/src/components/AllPostsPage.js" />
         <option value="$PROJECT_DIR$/src/App.css" />
-        <option value="$PROJECT_DIR$/src/components/PostDetail.js" />
         <option value="$PROJECT_DIR$/src/api/postsAPI.js" />
         <option value="$PROJECT_DIR$/src/components/CommentControl.js" />
         <option value="$PROJECT_DIR$/src/components/Menu.js" />
         <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/src/components/Post.js" />
         <option value="$PROJECT_DIR$/src/components/PostControl.js" />
+        <option value="$PROJECT_DIR$/src/reducers/index.js" />
+        <option value="$PROJECT_DIR$/src/components/PostDetail.js" />
       </list>
     </option>
   </component>
@@ -809,7 +806,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="202558000" />
+    <option name="totallyTimeSpent" value="204692000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
@@ -1094,34 +1091,10 @@
     <entry file="file://$PROJECT_DIR$/src/reducers/PostsReducer.js" />
     <entry file="file://$PROJECT_DIR$/src/reducers/RootReducer.js" />
     <entry file="file://$PROJECT_DIR$/src/reducers/CategoriesReducer.js" />
-    <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="157" column="39" lean-forward="false" selection-start-line="157" selection-start-column="39" selection-end-line="157" selection-end-column="39" />
-          <folding>
-            <element signature="e#46#68#0" expanded="true" />
-            <marker date="1517654733768" expanded="true" signature="7596:7660" ph="{...}" />
-            <marker date="1517654733768" expanded="true" signature="7596:7662" ph="{...}" />
-            <marker date="1517654733768" expanded="true" signature="7628:7653" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7875">
           <caret line="375" column="16" lean-forward="false" selection-start-line="375" selection-start-column="1" selection-end-line="375" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/PostDetail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="137" column="0" lean-forward="false" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
-          <folding>
-            <element signature="e#46#87#0" expanded="true" />
-            <marker date="1517654733729" expanded="true" signature="6128:6132" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1250,6 +1223,26 @@
         <state relative-caret-position="366">
           <caret line="67" column="31" lean-forward="true" selection-start-line="67" selection-start-column="31" selection-end-line="67" selection-end-column="31" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="278" column="1" lean-forward="true" selection-start-line="278" selection-start-column="1" selection-end-line="278" selection-end-column="1" />
+          <folding>
+            <element signature="e#46#68#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/PostDetail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="124" column="26" lean-forward="false" selection-start-line="124" selection-start-column="26" selection-end-line="124" selection-end-column="26" />
+          <folding>
+            <element signature="e#46#87#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

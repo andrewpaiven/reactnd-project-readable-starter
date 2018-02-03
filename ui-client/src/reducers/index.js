@@ -264,9 +264,12 @@ function reducer(state = initialState,action) {
             }
 
         case GET_POST:
+            let postDetail;
+            if(!action.post.error && action.post.deleted === false) postDetail = action.post
+            else postDetail: null
             return {
                 ...state,
-                postDetail: action.post
+                postDetail: postDetail
             }
 
         default:

@@ -64,54 +64,64 @@ class PostDetail extends Component {
         }
     }
 
+    renderPost = () => {
+        return(
+            <div>
+                {this.props.postControl.showModal && <PostControl/>}
+                <Post post={this.props.postDetail}/>
+                {this.props.commentControl.showModal && <CommentControl/>}
+                {this.props.postDetailComments.length !== 0 &&
+                <div>
+                    <h3>Comments</h3>
+                </div>
+                }
+                <div>
+                    <a className="newCommentTitle" onClick={()=>(this.setState({commentAddFieldsOn: true}))}>Add new comment</a>
+                </div>
+
+                {this.state.commentAddFieldsOn &&
+                <div style={{'marginTop':'20px'}}>
+                    <h5 className='commentPostTitle'>New Comment</h5>
+                    <form onSubmit={this.handleCommentSubmit}>
+                        <p className="verticalAlignMiddle">
+                            <label className="commentModalLabel">Comment</label>
+                            <textarea  className="bodyPostModal" type="text" name="commentBody" onChange={this.handleNewCommentInputChange}/>
+                        </p>
+                        <label className="commentModalLabel">Author</label>
+                        <input className="authorPostModal" type="text" name="commentAuthor" onChange={this.handleNewCommentInputChange}/>
+                        <div className="textAlignCenter">
+                            <input className="commentSubmitButton" type="submit" value="Submit"/>
+                            <button className="commentCancelButton" onClick={this.handleCloseModal}>Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                }
+                {this.props.postDetailComments.length !== 0 &&
+                this.props.postDetailComments.map((comment)=>(
+                    <div key={comment.id} className="commentDiv">
+                        <p>Comment by {comment.author} on {processTime(comment.timestamp)}</p>
+                        <p>{comment.body}</p>
+                        <CommentVoter commentId={comment.id} voteScore={comment.voteScore}/>
+                        <button onClick={() => this.handleEditComment(comment.author,comment.body,comment.id)} className="commentEditButton">Edit</button>
+                        <button onClick={() => this.props.deleteComment(comment.id)} className="commentDeleteButton">Delete</button>
+                    </div>
+                ))
+                }
+                {this.props.postDetailComments.length === 0 &&
+                <h3 className="noComments">No comments for this post</h3>}
+            </div>
+        )
+    }
+
     render() {
         return(
             <div className="container">
                 <Menu/>
                 <div className="postList">
                     <div className="postDiv">
-                        {this.props.postControl.showModal && <PostControl/>}
-                        {this.props.postDetail && <Post post={this.props.postDetail}/>}
-                        {this.props.commentControl.showModal && <CommentControl/>}
-                        {this.props.postDetailComments.length !== 0 &&
-                        <div>
-                            <h3>Comments</h3>
-                        </div>
-                        }
-                        <div>
-                            <a className="newCommentTitle" onClick={()=>(this.setState({commentAddFieldsOn: true}))}>Add new comment</a>
-                        </div>
-
-                        {this.state.commentAddFieldsOn &&
-                        <div style={{'marginTop':'20px'}}>
-                            <h5 className='commentPostTitle'>New Comment</h5>
-                            <form onSubmit={this.handleCommentSubmit}>
-                                <p className="verticalAlignMiddle">
-                                    <label className="commentModalLabel">Comment</label>
-                                    <textarea  className="bodyPostModal" type="text" name="commentBody" onChange={this.handleNewCommentInputChange}/>
-                                </p>
-                                <label className="commentModalLabel">Author</label>
-                                <input className="authorPostModal" type="text" name="commentAuthor" onChange={this.handleNewCommentInputChange}/>
-                                <div className="textAlignCenter">
-                                    <input className="commentSubmitButton" type="submit" value="Submit"/>
-                                    <button className="commentCancelButton" onClick={this.handleCloseModal}>Cancel</button>
-                                </div>
-                            </form>
-                        </div>
-                        }
-                        {this.props.postDetailComments.length !== 0 &&
-                        this.props.postDetailComments.map((comment)=>(
-                            <div key={comment.id} className="commentDiv">
-                                <p>Comment by {comment.author} on {processTime(comment.timestamp)}</p>
-                                <p>{comment.body}</p>
-                                <CommentVoter commentId={comment.id} voteScore={comment.voteScore}/>
-                                <button onClick={() => this.handleEditComment(comment.author,comment.body,comment.id)} className="commentEditButton">Edit</button>
-                                <button onClick={() => this.props.deleteComment(comment.id)} className="commentDeleteButton">Delete</button>
-                            </div>
-                        ))
-                        }
-                        {this.props.postDetailComments.length === 0 &&
-                        <h3 className="noComments">No comments for this post</h3>}
+                        {!this.props.postDetail &&
+                        <h2>Ups ! The post you requested is not available</h2>}
+                        {this.props.postDetail && this.renderPost()}
                     </div>
                 </div>
             </div>
