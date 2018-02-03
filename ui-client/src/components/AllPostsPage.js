@@ -40,9 +40,7 @@ class AllPostsPage extends Component {
         //Prefills the category of the new post form with either the current category selected
         //or the first category in the list
         let categoryForNewPost;
-        this.props.categoryFilter === 'All Posts' ?
-            categoryForNewPost = this.props.categories[0].name :
-            categoryForNewPost = this.props.categoryFilter
+        (!this.props.categoryFilter || this.props.categoryFilter === 'All Posts') ? categoryForNewPost = this.props.categories[0].name : categoryForNewPost = this.props.categoryFilter
 
         this.props.openPostControl(
             true, //Display Modal

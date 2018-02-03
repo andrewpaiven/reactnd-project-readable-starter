@@ -123,7 +123,8 @@ function reducer(state = initialState,action) {
 
             return {
                 ...state,
-                postList: postList
+                postList: postList,
+                postDetail: null
             }
 
         case RECEIVE_POST_COMMENTS:
@@ -266,7 +267,7 @@ function reducer(state = initialState,action) {
         case GET_POST:
             let postDetail;
             if(!action.post.error && action.post.deleted === false) postDetail = action.post
-            else postDetail: null
+            else postDetail = null
             return {
                 ...state,
                 postDetail: postDetail

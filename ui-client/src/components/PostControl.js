@@ -9,7 +9,7 @@ class PostControl extends Component {
 
     state = {
         postTitle: null,
-        newPostCategory: this.props.categoryFilter,
+        newPostCategory: null,
         postAuthor: null,
         postBody: null,
     }

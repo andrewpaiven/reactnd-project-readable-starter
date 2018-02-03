@@ -7,11 +7,19 @@ import { Link, withRouter } from 'react-router-dom'
 import PostVoter from './PostVoter.js'
 import { displayPostDetails, deletePost, openPostControl} from '../actions/PostsActions'
 import { processTime } from "../helpers/TimeFunctions"
+import { Redirect } from 'react-router-dom'
 
 class Post extends Component {
 
+    state = {
+        redirect: false
+    }
+
     handlePostDeletion = () => {
         this.props.deletePost(this.props.post.id)
+        this.setState({
+            redirect: true
+        })
     }
 
     handlePostEdit = () => {
@@ -39,8 +47,8 @@ class Post extends Component {
                 <span className="postTimeStampAndCategory">{`Posted in ${this.props.post.category} on ${processTime(this.props.post.timestamp)}`}</span>
                 <button onClick={this.handlePostEdit} className="postEdit">Edit Post</button>
                 <button onClick={this.handlePostDeletion} className="postDelete">Delete Post</button>
+                {this.state.redirect && <Redirect to="/"/>}
             </div>
-
         )
     }
 }
