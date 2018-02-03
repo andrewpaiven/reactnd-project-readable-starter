@@ -39,18 +39,14 @@ function reducer(state = initialState,action) {
 
     switch(action.type) {
 
+        //Handling of post actions
+
         case RECEIVE_ALL_POSTS:
             return {
                 ...state,
                 postList: _.mapKeys(action.posts,'id'),
                 categoryFilter: action.category
         }
-
-        case RECEIVE_ALL_CATEGORIES:
-            return {
-                ...state,
-                categories: _.mapKeys(action.categories,'name')
-            }
 
         case RECEIVE_POSTS_BY_CATEGORY:
             return {
@@ -90,10 +86,10 @@ function reducer(state = initialState,action) {
             }
             return {
                 ...state,
-               postList: {
-                   ...state.postList,
-                   [action.post.id]: action.post
-               }
+                postList: {
+                    ...state.postList,
+                    [action.post.id]: action.post
+                }
             }
 
         case VOTE_POST_DOWN:
@@ -126,6 +122,68 @@ function reducer(state = initialState,action) {
                 postList: postList,
                 postDetail: null
             }
+
+        case GET_POST:
+            let postDetail;
+            if(!action.post.error && action.post.deleted === false) postDetail = action.post
+            else postDetail = null
+            return {
+                ...state,
+                postDetail: postDetail
+            }
+
+        case POST_CONTROL:
+            return {
+                ...state,
+                postControl: {
+                    ...state.postControl,
+                    'showModal': action.showModal,
+                    'postTitle': action.postTitle,
+                    'postAuthor': action.postAuthor,
+                    'postBody': action.postBody,
+                    'postCategory': action.postCategory,
+                    'postId': action.postId,
+                    'mode': action.mode
+                }
+            }
+
+        case EDIT_POST:
+            return {
+                ...state,
+                postList: {
+                    ...state.postList,
+                    [action.post.id]: action.post
+                },
+                postControl: {
+                    showModal: false
+                },
+                postDetail: action.post
+
+            }
+
+        case POSTS_SORT_BY_FILTER:
+            let newOrder
+            if(action.filter === state.postsSortByFilter) {
+                switch(state.postsSortByOrder) {
+                    case 'asc':
+                        newOrder = 'desc'
+                        break
+                    case 'desc':
+                        newOrder = 'asc'
+                        break
+                    default:
+                        newOrder = 'desc'
+                        break
+                }
+            }
+            else newOrder = 'desc'
+            return {
+                ...state,
+                postsSortByFilter: action.filter,
+                postsSortByOrder: newOrder
+            }
+
+       // Handling of Comment Actions
 
         case RECEIVE_POST_COMMENTS:
             return {
@@ -204,35 +262,6 @@ function reducer(state = initialState,action) {
                 }
             }
 
-        case POST_CONTROL:
-            return {
-                ...state,
-                postControl: {
-                    ...state.postControl,
-                    'showModal': action.showModal,
-                    'postTitle': action.postTitle,
-                    'postAuthor': action.postAuthor,
-                    'postBody': action.postBody,
-                    'postCategory': action.postCategory,
-                    'postId': action.postId,
-                    'mode': action.mode
-                }
-            }
-
-        case EDIT_POST:
-            return {
-                ...state,
-                postList: {
-                    ...state.postList,
-                    [action.post.id]: action.post
-                },
-                postControl: {
-                  showModal: false
-                },
-                postDetail: action.post
-
-            }
-
         case EDIT_COMMENT:
             return {
                 ...state,
@@ -242,36 +271,14 @@ function reducer(state = initialState,action) {
                 }
             }
 
-        case POSTS_SORT_BY_FILTER:
-            let newOrder
-            if(action.filter === state.postsSortByFilter) {
-                switch(state.postsSortByOrder) {
-                    case 'asc':
-                        newOrder = 'desc'
-                        break
-                    case 'desc':
-                        newOrder = 'asc'
-                        break
-                    default:
-                        newOrder = 'desc'
-                        break
-                }
-            }
-            else newOrder = 'desc'
+        //Handle category actions
+
+        case RECEIVE_ALL_CATEGORIES:
             return {
                 ...state,
-                postsSortByFilter: action.filter,
-                postsSortByOrder: newOrder
+                categories: _.mapKeys(action.categories,'name')
             }
 
-        case GET_POST:
-            let postDetail;
-            if(!action.post.error && action.post.deleted === false) postDetail = action.post
-            else postDetail = null
-            return {
-                ...state,
-                postDetail: postDetail
-            }
 
         default:
             return state
