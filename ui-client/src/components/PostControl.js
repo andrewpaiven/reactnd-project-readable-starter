@@ -56,7 +56,7 @@ class PostControl extends Component {
                 break
             case 'newPostSelectCategory':
                 this.setState({
-                    PostCategory: value
+                    postCategory: value
                 })
                 break
             case 'postAuthor':

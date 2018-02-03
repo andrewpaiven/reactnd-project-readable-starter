@@ -24,7 +24,7 @@ class Menu extends Component {
                 </li>
                 {this.props.categories.map((category)=>(
                     <li key={category.name} className="menuItem" onClick={()=>this.props.fetchPostsByCategory(category.name)}>
-                        <Link className="menuItem" style={{textDecoration: 'none', color:'inherit'}} to={`/category/${category.name}`}>{category.name}</Link>
+                        <Link className="menuItem" style={{textDecoration: 'none', color:'inherit'}} to={`/${category.name}`}>{category.name}</Link>
                     </li>
                 ))}
             </ul>

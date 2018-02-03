@@ -13,10 +13,10 @@ class App extends Component {
                 <Route exact path="/" component={AllPostsPage}/>
 
                 {/* Posts of category*/}
-                <Route exact path="/category/:category" component={AllPostsPage}/>
+                <Route exact path="/:category" component={AllPostsPage}/>
 
                 {/* Post Detail Page */}
-                <Route exact path="/postdetail/:id" component={PostDetail}/>
+                <Route exact path="/:category/:id" component={PostDetail}/>
 
             </div>
         )

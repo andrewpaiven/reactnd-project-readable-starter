@@ -30,7 +30,7 @@ class Post extends Component {
         return(
             <div>
                 <h1 className="postTitle">
-                    <Link to={`/postdetail/${this.props.post.id}`} className="postTitle" style={{'textDecoration':'none','color':'inherit'}}> {`${this.props.post.title}`}</Link>
+                    <Link to={`/${this.props.post.category}/${this.props.post.id}`} className="postTitle" style={{'textDecoration':'none','color':'inherit'}}> {`${this.props.post.title}`}</Link>
                 </h1>
                 <h2 className="postAuthor">{`by ${this.props.post.author}`}</h2>
                 <p>{`Comments: ${this.props.post.commentCount}`}</p>
